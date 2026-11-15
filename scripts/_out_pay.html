@@ -1,0 +1,48 @@
+<div class="sec">我的次数</div>
+  <div class="card">
+    <div class="qr-top">
+      <div><div class="qr-n" id="payRemain">—</div>
+        <div class="qr-l">剩余可看完整报告</div></div>
+      <div class="qr-r" id="payRemainNote">已经用完了</div>
+    </div>
+  </div><div class="sec">兑换次数</div>
+  <div class="card">
+    <div class="cdk-t">输入兑换码</div>
+    <div class="cdk-d">在小红书或闲鱼买到码之后，填在这里就能解锁。</div>
+    <input type="text" id="cdkIn" class="cdk-in" placeholder="YLXX-XXXX-XXXX-XX"
+           autocapitalize="characters" autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="btn" id="cdkBtn" style="margin-top:11px" onclick="redeemCdk()">解锁次数</button>
+    <div id="cdkOut"></div>
+  </div><div class="sec">可以买到什么</div><div class="plist"><div class="plan">
+      
+      <div class="pn">看 1 次</div>
+      <div class="pp">¥2.9</div>
+      <div class="pd">1 次完整报告</div>
+    </div><div class="plan hot">
+      <span class="pflag">最多人选</span>
+      <div class="pn">看 5 次</div>
+      <div class="pp">¥9.9</div>
+      <div class="pd">5 次完整报告</div>
+    </div><div class="plan">
+      
+      <div class="pn">看 20 次</div>
+      <div class="pp">¥19.9</div>
+      <div class="pd">20 次完整报告</div>
+    </div></div>
+  <div class="pw-n">这里只做介绍，<b>不在本页收款</b>。<br>
+    在小红书或闲鱼拍下后我会把兑换码发给你，回来填上面那一栏就行。</div><div class="sec">想要更多次数</div>
+  <div class="card">
+    <div class="cdk-d">次数需求大的，或者要帮朋友一起买，直接找我开一个「大额码」，一次到位。</div>
+    <div class="wxbox">
+      <div class="wx-l">微信号</div>
+      <div class="wx-v">wxid_srkzcgtrom9h12</div>
+      <button class="btn ghost sm" style="margin-top:10px" onclick="copyWx()">复制微信号</button>
+    </div>
+  </div><details>
+    <summary>换了手机、或者清了浏览器数据，次数还在吗？</summary>
+    <div class="oneline" style="margin-top:8px">
+      在。<b>拿同一个兑换码再填一次</b>就行 —— 次数会从旧设备转到新设备上，不会多给也不会少。<br>
+      唯一的例外：旧设备上已经用掉了几次的话，整串码就不能再领了，
+      这时候把码发我，我帮你处理。
+    </div>
+  </details><button class="btn ghost sm" style="margin-top:14px" onclick="show('home')">返回首页</button>

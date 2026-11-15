@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>运营台 · 月老合盘</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="icon.svg">
+<meta name="theme-color" content="#f97316">
+<style>
+:root{
+  --accent:#f97316;--accent-d:#ea580c;--accent-l:#fff7ed;
+  --ink:#1f2937;--ink2:#4b5563;--ink3:#9ca3af;
+  --line:#e8ecf0;--bg:#f7f8fa;--card:#fff;
+  --good:#16a34a;--warn:#ea580c;--bad:#dc2626;--r:12px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:15px;line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:620px;margin:0 auto;padding:18px 14px 60px}
+
+header{display:flex;align-items:center;gap:11px;padding:4px 0 14px;
+  border-bottom:2px solid var(--accent);margin-bottom:16px}
+header svg{flex:0 0 auto;width:36px;height:36px;border-radius:9px}
+h1{font-size:18px;margin:0;letter-spacing:-.2px}
+.sub{font-size:12px;color:var(--ink3);margin:0}
+
+.sec{font-size:12.5px;font-weight:700;color:var(--ink3);letter-spacing:.6px;
+  margin:22px 0 9px;text-transform:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 15px;margin-bottom:10px}
+/* 「已解锁」那一坨会随每笔成交越积越多，是最容易把页面撑爆的地方 —— 默认折起来。
+   摘要行里保留数量，所以不看细节也知道卖了大概多少单。 */
+/* 摘要行：单行标题 + 右侧提示；批次那种带副行的用 .ds 落到第二行。
+   ⚠️ 别用 justify-content:space-between 了事 —— 批次摘要有三个 flex 项
+   （标题文本 / 副行 .ds / ::after 提示），space-between 会把「点开查看」
+   塞到标题和副行**中间**，在手机上看起来就是提示文字插进了正文里（真踩到）。
+   改用 flex-wrap + order 明确排布：第一行 = 标题 + 提示（提示靠右），第二行 = 副行。 */
+.fold{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  margin-bottom:10px;overflow:hidden}
+.fold>summary{list-style:none;cursor:pointer;padding:12px 15px;display:flex;
+  flex-wrap:wrap;align-items:baseline;gap:2px 8px;
+  font-size:13.5px;font-weight:600;color:var(--ink2)}
+.fold>summary::-webkit-details-marker{display:none}
+.fold>summary::after{content:"点开查看";order:1;margin-left:auto;
+  font-size:12px;font-weight:400;color:var(--ink3);white-space:nowrap}
+.fold>summary .ds{order:3;flex:1 1 100%;font-size:11.5px;font-weight:400;color:var(--ink3)}
+.fold[open]>summary::after{content:"收起"}
+.fold[open]>summary{border-bottom:1px solid var(--line)}
+.fold-b{padding:12px 12px 2px;background:#fafbfc}
+/* 折叠块里的第一个分组标题别再顶出一大截 —— .sec 的间距本来是给整页用的 */
+.fold-b>.sec:first-child{margin-top:2px}
+/* 历史批次里的单个码：一行一个，复制/标记按钮在右边。
+   ⚠️ 类名用 .cc 不用 .code —— .code 是上面「订单卡片里那串大字码」的样式，
+   撞名会被继承掉字号/字重/颜色。 */
+.cdkrow{background:#fff;border:1px solid var(--line);border-radius:10px;
+  padding:9px 11px;margin-bottom:8px}
+.cdkrow .c1{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+.cdkrow .cc{font-family:ui-monospace,Consolas,monospace;font-size:13.5px;font-weight:700;
+  letter-spacing:.4px;color:var(--ink);word-break:break-all}
+.cdkrow .c2{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:6px}
+.cdkrow .meta{font-size:11.5px;color:var(--ink3)}
+.cdkrow .sent{font-size:11.5px;color:#166534;background:#f0fdf4;border:1px solid #bbf7d0;
+  border-radius:6px;padding:1px 6px}
+.cdkrow .btn{margin:0}
+.p-open{background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe}
+.hint{font-size:12.5px;color:var(--ink3);margin:9px 0 0}
+
+input{width:100%;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;
+  font-size:15px;font-family:inherit;background:#fff;color:var(--ink);outline:none}
+input:focus{border-color:var(--accent)}
+.mono{font-family:ui-monospace,Consolas,monospace;letter-spacing:1.5px}
+
+.btn{display:block;width:100%;padding:12px;border:none;border-radius:10px;
+  background:var(--accent);color:#fff;font-size:15px;font-weight:600;
+  font-family:inherit;cursor:pointer;margin-top:10px}
+.btn:active{background:var(--accent-d)}
+.btn.ghost{background:#fff;color:var(--ink2);border:1.5px solid var(--line)}
+.btn.ghost:active{background:#f4f6f8}
+.btn.sm{padding:9px 14px;font-size:13.5px;width:auto;display:inline-block;margin:0}
+.btn[disabled]{opacity:.5}
+
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:6px 0;font-size:13.5px;border-bottom:1px solid #f6f8fa}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink3);flex:0 0 auto}
+.row .v{color:var(--ink);text-align:right;word-break:break-all}
+
+.ohead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;
+  margin-bottom:8px;padding-bottom:9px;border-bottom:1px dashed var(--line)}
+.oid{font-family:ui-monospace,Consolas,monospace;font-size:13px;font-weight:700;
+  color:var(--ink);letter-spacing:.6px}
+.otime{font-size:11.5px;color:var(--ink3)}
+.amt{font-size:19px;font-weight:800;color:var(--accent);white-space:nowrap}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;
+  border-radius:20px;white-space:nowrap}
+.p-pending{background:#fff7ed;color:var(--warn);border:1px solid #fed7aa}
+.p-paid{background:#f0fdf4;color:var(--good);border:1px solid #bbf7d0}
+.p-used{background:#f4f6f8;color:var(--ink3);border:1px solid var(--line)}
+
+.codebox{margin-top:11px;padding:13px;border-radius:10px;background:var(--accent-l);
+  border:1px solid #fed7aa;text-align:center}
+.codelabel{font-size:11.5px;color:#9a3412;margin-bottom:5px}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:25px;font-weight:800;
+  letter-spacing:3px;color:var(--accent-d);word-break:break-all;line-height:1.3}
+
+.empty{text-align:center;color:var(--ink3);font-size:13.5px;padding:26px 10px}
+.foot{font-size:12px;color:var(--ink3);text-align:center;margin-top:28px;line-height:1.9}
+.alert{border-radius:10px;padding:12px 14px;font-size:13.5px;margin-bottom:12px}
+.alert.err{background:#fef2f2;border:1px solid #fecaca;color:#991b1b}
+.alert.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#166534}
+.alert.info{background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af}
+.hide{display:none!important}
+
+#toast{position:fixed;left:50%;bottom:34px;transform:translate(-50%,20px);
+  background:rgba(31,41,55,.93);color:#fff;font-size:13.5px;padding:10px 18px;
+  border-radius:22px;opacity:0;pointer-events:none;transition:.22s;z-index:99;max-width:86%}
+#toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <svg viewBox="0 0 64 64" aria-hidden="true">
+    <defs><linearGradient id="lg" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#fdba74"/><stop offset="1" stop-color="#ea580c"/>
+    </linearGradient></defs>
+    <rect width="64" height="64" rx="15" fill="url(#lg)"/>
+    <path fill="#fff" d="M32 49.8C20.4 42.3 11.6 34.6 11.6 26.1c0-6.5 5-11.4 11.3-11.4 3.9 0 7.2 2.3 9.1 5.9 1.9-3.6 5.2-5.9 9.1-5.9 6.3 0 11.3 4.9 11.3 11.4 0 8.5-8.8 16.2-20.4 23.7z"/>
+  </svg>
+  <div>
+    <h1>运营台</h1>
+    <p class="sub">生成码 → 发给顾客 → 他自己兑换 · 这一页只有你一个人看</p>
+  </div>
+</header>
+
+<div id="msg"></div>
+
+<div class="sec">管理口令</div>
+<div class="card">
+  <div class="row" style="border:none;padding:0 0 9px">
+    <span class="k" style="font-size:12.5px">口令只存这台设备，不会外发</span>
+  </div>
+  <input type="password" id="tok" class="mono" placeholder="粘贴 ADMIN_TOKEN" autocomplete="off">
+  <button class="btn" id="btnLoad" onclick="load()">加载数据</button>
+  <div style="display:flex;gap:8px;margin-top:9px">
+    <button class="btn ghost sm" style="flex:1" onclick="forget()">清除口令</button>
+    <button class="btn ghost sm" style="flex:1" onclick="load()">刷新</button>
+  </div>
+</div>
+
+<div class="sec">CDK · 生成与兑换管理</div>
+<div class="card">
+  <div class="dd" style="font-size:13px;color:var(--ink3);margin-bottom:9px">
+    <b>CDK 是拿去第三方平台卖的码</b>（小红书 / 闲鱼），<b>一码只能用一次</b>，
+    买家回网站自己输码解锁 —— 钱不经过本站，所以不需要你有支付资质。<br>
+    <span style="color:#9a3412">生成即等于印钱</span>，码别贴到公开地方。
+  </div>
+  <div class="dd" style="font-size:12.5px;color:#9a3412;margin-bottom:11px;
+       border-left:3px solid #fca5a5;padding-left:10px;line-height:1.75">
+    ⚠️ <b>发布前先把这份码库导出一次</b>（下面的「导出/备份码库」按钮）。
+    原因：本地 <span class="mono">data/cdks.json</span> 里的「谁兑过」是旧的，
+    一旦发布时线上数据目录被重置，这份旧库就成了线上初始状态 ——
+    已卖出去的码会「复活」成未使用（能再兑一次）。<br>
+    实测：<b>复用同一个应用发布时，线上数据不会被覆盖</b>，只有新建应用时才会 ——
+    但这从外面没法保证（沙箱也可能被平台重建），所以这一步照做。<br>
+    导出 → 覆盖本地 <span class="mono">match/data/cdks.json</span> → 再发布。
+    清数据脚本会<b>保留</b>这个文件，不用手动放回去。
+  </div>
+  <div style="display:flex;gap:8px">
+    <input type="text" id="cdkTimes" class="mono" placeholder="每码几次，如 5"
+           inputmode="numeric" autocomplete="off" style="flex:1">
+    <input type="text" id="cdkCount" class="mono" placeholder="生成几个，如 10"
+           inputmode="numeric" autocomplete="off" style="flex:1">
+  </div>
+  <div style="display:flex;gap:8px;margin-top:8px">
+    <input type="text" id="cdkDays" class="mono" placeholder="有效天数（默认 365，0=永久）"
+           inputmode="numeric" autocomplete="off" style="flex:1">
+    <input type="text" id="cdkLabel" placeholder="备注，如 闲鱼 9.9 档"
+           autocomplete="off" style="flex:1">
+  </div>
+  <button class="btn" onclick="makeCdk()">生成</button>
+  <button class="btn ghost sm" style="margin-top:8px" onclick="loadCdk()">刷新码库统计</button>
+  <button class="btn ghost sm" style="margin-top:8px" onclick="exportCdk()">导出 / 备份码库</button>
+  <div id="cdkOut"></div>
+  <div id="cdkStat"></div>
+
+  <!-- 历史批次：生成那一屏一关，码就只剩数字了；这里能把码捞回来重发。
+       整块默认折叠 —— 这一页刚因为「越用越长」被优化过，别再堆回去。 -->
+  <div class="sec" style="margin:17px 0 7px">历史批次与码</div>
+  <div style="display:flex;gap:8px">
+    <input type="text" id="cdkQ" class="mono" placeholder="按码查找，如 YL6Z 或 YL6Z-JVNC"
+           autocomplete="off" style="flex:1">
+    <button class="btn ghost sm" style="margin:0;flex:0 0 auto" onclick="searchCdk()">查找</button>
+  </div>
+  <div id="cdkHist" class="dd" style="font-size:12.5px;color:var(--ink3);margin-top:9px">
+    点上面「刷新码库统计」加载批次；展开某批即可看到该批全部码，可单个复制或标记已发给谁。
+  </div>
+</div>
+
+<!-- ══ 应急通道：旧版扫码收款那一套 + 客服补偿 ══
+     CDK 上线之后这两块平时都用不到了，但**不能删** ——
+     万一哪天 CDK 被平台封号（小红书/闲鱼都禁站外交易），这是唯一能立刻切回去收钱的通道：
+       · 旧扫码页  → renderPayLegacy() → /api/admin/confirm（人工点一下解锁）
+       · 自助放行  → /api/admin/block    （先给货后对账的风控开关）
+       · 凭订单号补 → /api/admin/code     （订单表丢了也能把码还给顾客）
+     所以整块默认收起：平时只占一行，要用的时候点开。
+     ⚠️ 「收起」只是显示层面的事，卡片仍在 DOM 里、「有几张卡」这类断言照样成立。 -->
+<details class="fold" id="foldLegacy">
+  <summary>应急通道 · 旧版收款 / 客服补偿</summary>
+  <div class="fold-b">
+    <div class="dd" style="font-size:12.5px;color:var(--ink3);margin:0 0 4px;line-height:1.85">
+      <b>平时不用打开。</b>只有两种情况需要：<br>
+      ① 老单是走扫码买的，要人工点一下解锁；<br>
+      ② 顾客次数没到账、或者要退 —— 这一步跟收款方式无关，<b>CDK 的单也会用到</b>。
+    </div>
+
+    <div class="sec">待核对到账 / 已解锁</div>
+    <div id="body"></div>
+
+    <div class="sec">订单记录丢了？凭订单号补</div>
+    <div class="card">
+      <div class="dd" style="font-size:13px;color:var(--ink3);margin-bottom:9px">
+        <b>正常收款不用走这里。</b>这是兜底入口 —— 兑换码是由订单号算出来的，
+        只要用户手里还有那串订单号，就算这边记录全没了，也能把码还给他。<br>
+        <span style="color:#9a3412">注意：这条路只能给码，<b>不能自动加次数</b>（拿不到是哪台设备），
+        得让用户自己填进去。</span>
+      </div>
+      <input type="text" id="byOrder" class="mono" placeholder="订单号 YLB…" autocapitalize="characters"
+             style="text-transform:uppercase">
+      <button class="btn" onclick="codeByOrder()">算出兑换码</button>
+      <div id="byOrderOut"></div>
+    </div>
+
+    <div class="sec">客服补偿 · 手工补次数</div>
+    <div class="card">
+      <div class="dd" style="font-size:13px;color:var(--ink3);margin-bottom:9px">
+        <b>这是账外的加减，不对应任何订单。</b>用在「付了钱但次数没到账」「加多了要退回」这类情况。<br>
+        <span style="color:#9a3412">原因必须填</span> —— 以后看到某台设备凭空多几次，
+        就得靠这句话说清是谁、为什么加的。
+      </div>
+      <input type="text" id="gdDev" class="mono" placeholder="设备号（顾客那台的完整序号）" autocomplete="off">
+      <input type="text" id="gdN" class="mono" placeholder="次数，补写 5；退回写 -5" autocomplete="off" inputmode="numeric">
+      <input type="text" id="gdWhy" placeholder="原因，如：9/13 付款后一直转圈没到账，补偿" autocomplete="off">
+      <button class="btn" onclick="grantOne()">确定补次数</button>
+      <div id="grantOut"></div>
+    </div>
+  </div>
+</details>
+
+<div class="foot">
+  本页只是给你自己用的对账工具，别把地址和口令发给别人。<br>
+  一切以你实际到账为准 —— 没收到钱就不要解锁。
+</div>
+
+</div>
+<div id="toast"></div>
+
+<script>
+var K = 'yuelao_admin_token';
+var $ = function (id) { return document.getElementById(id); };
+var esc = function (s) {
+  return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+  });
+};
+function toast(m) {
+  var t = $('toast'); t.textContent = m; t.classList.add('on');
+  setTimeout(function () { t.classList.remove('on'); }, 2200);
+}
+function money(n) { return '¥' + (Math.round(Number(n) * 100) / 100).toFixed(2).replace(/\.00$/, ''); }
+function when(ts) {
+  if (!ts) return '';
+  var d = new Date(ts), p = function (n) { return n < 10 ? '0' + n : '' + n; };
+  return (d.getMonth() + 1) + '月' + d.getDate() + '日 ' + p(d.getHours()) + ':' + p(d.getMinutes());
+}
+function token() { return ($('tok').value || '').trim().toUpperCase(); }
+function forget() {
+  try { localStorage.removeItem(K); } catch (e) {}
+  $('tok').value = '';
+  $('body').innerHTML = '';
+  notice('info', '已清除本机保存的口令。');
+}
+function notice(kind, html) {
+  $('msg').innerHTML = html ? '<div class="alert ' + kind + '">' + html + '</div>' : '';
+}
+function go(url) { try { location.href = url; } catch (e) {} }
+
+/* 复制：手机上 navigator.clipboard 在 http 下会被拒，退回 textarea + execCommand */
+function copy(text, tip) {
+  var done = function () { toast(tip || '已复制'); };
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(done, function () { fallback(); });
+  } else { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { toast('复制不了，请长按手动选'); }
+    document.body.removeChild(ta);
+  }
+}
+
+var ORDERS = [];
+
+function load() {
+  var t = token();
+  if (!t) { notice('err', '先填管理口令。'); return; }
+  try { localStorage.setItem(K, t); } catch (e) {}
+  $('btnLoad').disabled = true;
+  $('btnLoad').textContent = '读取中…';  fetch('/api/admin/orders', { headers: { 'x-admin-token': t } })
+    .then(function (r) { return r.json().then(function (j) { return { s: r.status, j: j }; }); })
+    .then(function (res) {
+      $('btnLoad').disabled = false;
+      $('btnLoad').textContent = '加载数据';
+      var j = res.j || {};
+      if (!j.ok) {
+        notice('err', '<b>读不到订单：</b>' + esc(j.error || ('HTTP ' + res.s)) +
+          (res.s === 403 ? '<br>多半是服务器还没配 ADMIN_TOKEN，或者配了但没重启服务。' : ''));
+        return;
+      }
+      ORDERS = j.orders || [];
+      notice('', '');
+      render();
+      loadCdk();   /* 顺带刷码库统计：同一个口令，没必要让用户点两次 */
+    })
+    .catch(function (e) {
+      $('btnLoad').disabled = false;
+      $('btnLoad').textContent = '加载数据';
+      notice('err', '网络不通：' + esc(e.message || e));
+    });
+}
+
+function confirmOne(orderId) {
+  var t = token();
+  if (!t) { notice('err', '先填管理口令。'); return; }
+  fetch('/api/admin/confirm', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: t, orderId: orderId })
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) { toast(j.error || '确认失败'); return; }
+      var u = j.unlocked || {};
+      if (u.ok) {
+        notice('ok', '<b>已解锁。</b>' + (u.already
+          ? '这单之前就解锁过了，没有重复加次数。'
+          : '已给用户加上 <b>' + u.added + ' 次</b>' +
+            (u.remaining === null || u.remaining === undefined ? '' : '，该设备现在剩 ' + u.remaining + ' 次') +
+            '。用户只要页面开着，几秒内就会自己到账。'));
+        toast(u.already ? '之前已解锁过，未重复加' : '已解锁 +' + u.added + ' 次');
+      } else {
+        notice('err', '<b>没能自动解锁：</b>' + esc(u.error || '') +
+          '<br>原因多半是订单记录丢了、拿不到是哪台设备。已把兑换码算在下面，' +
+          '<b>把它发给用户让他手动兑换</b>。');
+        toast('没能自动解锁，兑换码已备好');
+        $('byOrder').value = orderId;
+        codeByOrder();
+      }
+      load();
+    })
+    .catch(function (e) { toast('网络不通：' + (e.message || e)); });
+}
+
+/* 只凭订单号出码：订单记录丢了时的自救入口 */
+function codeByOrder() {
+  var t = token();
+  if (!t) { notice('err', '先填管理口令。'); return; }
+  var oid = ($('byOrder').value || '').trim().toUpperCase();
+  if (!oid) { toast('先填订单号'); return; }
+  $('byOrderOut').innerHTML = '<div class="foot" style="margin-top:10px">计算中…</div>';
+  fetch('/api/admin/code', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: t, orderId: oid })
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) { $('byOrderOut').innerHTML = '<div class="alert err" style="margin-top:11px">' + esc(j.error || '算不出来') + '</div>'; return; }
+      var h = '<div class="codebox"><div class="codelabel">兑换码（发给用户）</div>' +
+              '<div class="code">' + esc(j.code) + '</div>' +
+              '<div class="dd" style="font-size:12.5px;color:#9a3412;margin-top:7px">' +
+              esc(j.planName || '') + ' · ' + j.times + ' 次 · ' + money(j.amount) + '</div>';
+      if (j.redeemed) {
+        h += '<div class="dd" style="font-size:12.5px;color:#166534;margin-top:6px">' +
+             '这单已经在 ' + when(j.redeemed.at) + ' 被兑换过了（' + esc(j.redeemed.device) + '）</div>';
+      }
+      h += '<button class="btn sm" style="width:100%;margin-top:11px" onclick="copyReply(\'' +
+           esc(j.code) + '\',\'' + esc(j.orderId) + '\')">复制发给用户的话</button>' +
+           '<button class="btn ghost sm" style="width:100%;margin-top:7px" onclick="copy(\'' +
+           esc(j.code) + '\',\'兑换码已复制\')">只复制兑换码</button></div>';
+      $('byOrderOut').innerHTML = h;
+    })
+    .catch(function (e) {
+      $('byOrderOut').innerHTML = '<div class="alert err" style="margin-top:11px">网络不通：' + esc(e.message || e) + '</div>';
+    });
+}
+
+/* 账外补次数：付了钱没到账、或者加多了要退回，都走这里。
+   ⚠️ 它不产生订单 —— 所以「这台设备哪来的 5 次」只能靠原因那句话解释。 */
+function grantOne() {
+  var t = token();
+  if (!t) { notice('err', '先填管理口令。'); return; }
+  var d = ($('gdDev').value || '').trim();
+  var n = parseInt(($('gdN').value || '').trim(), 10);
+  var why = ($('gdWhy').value || '').trim();
+  if (!d) { toast('先填设备号'); return; }
+  if (!isFinite(n) || n === 0) { toast('次数要填非零整数'); return; }
+  if (!why) { toast('必须写原因'); return; }
+
+  var short = d.slice(0, 16) + '…';
+  if (!window.confirm((n > 0 ? '给 ' + short + ' 补 ' + n + ' 次？' : '从 ' + short + ' 扣 ' + (-n) + ' 次？') +
+                      '\n原因：' + why)) return;
+
+  $('grantOut').innerHTML = '<div class="foot" style="margin-top:10px">提交中…</div>';
+  fetch('/api/admin/grant', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: t, deviceId: d, times: n, reason: why })
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) {
+        $('grantOut').innerHTML = '<div class="alert err" style="margin-top:11px">' + esc(j.error || '没成功') + '</div>';
+        return;
+      }
+      $('grantOut').innerHTML = '<div class="alert ok" style="margin-top:11px">改好了：' +
+        '余额 ' + j.before + ' → <b>' + j.after + '</b> 次。' +
+        '<br><span style="font-size:12.5px">顾客那边刷新页面就能看到新次数，不用他做任何操作。</span></div>';
+      toast('余额 ' + j.before + ' → ' + j.after);
+      $('gdN').value = ''; $('gdWhy').value = '';
+      load();
+    })
+    .catch(function (e) {
+      $('grantOut').innerHTML = '<div class="alert err" style="margin-top:11px">网络不通：' + esc(e.message || e) + '</div>';
+    });
+}
+
+/* ---------- CDK：生成与统计 ----------
+   生成的码是要拿去卖的，所以这一块的两个动作都做了二次确认。
+   ⚠️ 别把生成按钮做成「点一下就给码」——手滑输错数量就是白送钱。 */
+function makeCdk() {
+  var t = token();
+  if (!t) { notice('err', '先填管理口令。'); return; }
+  var times = parseInt(($('cdkTimes').value || '').trim(), 10);
+  var count = parseInt(($('cdkCount').value || '').trim(), 10);
+  var daysRaw = ($('cdkDays').value || '').trim();
+  var days = daysRaw === '' ? 365 : parseInt(daysRaw, 10);
+  var label = ($('cdkLabel').value || '').trim();
+
+  if (!isFinite(times) || times < 1) { toast('「每码几次」要填正整数'); return; }
+  if (!isFinite(count) || count < 1) { toast('「生成几个」要填正整数'); return; }
+  if (!isFinite(days) || days < 0) { toast('有效天数要填 0 或正整数'); return; }
+
+  if (!window.confirm('生成 ' + count + ' 个「每个 ' + times + ' 次」的码？\n' +
+                      '有效期：' + (days > 0 ? days + ' 天' : '永久') + '\n' +
+                      '（生成后即可出售，请确认次数和数量没填错）')) return;
+
+  $('cdkOut').innerHTML = '<div class="foot" style="margin-top:10px">生成中…</div>';
+  fetch('/api/admin/cdk', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: t, times: times, count: count, days: days, label: label })
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) {
+        $('cdkOut').innerHTML = '<div class="alert err" style="margin-top:11px">' +
+          esc(j.error || '没成功') + '</div>';
+        return;
+      }
+      var rows = Math.min(12, Math.max(3, j.codes.length));
+      $('cdkOut').innerHTML =
+        '<div class="alert ok" style="margin-top:11px">生成了 <b>' + j.codes.length + '</b> 个码' +
+        '（每个 ' + j.times + ' 次 · ' + (j.days > 0 ? j.days + ' 天有效' : '永久') + '）' +
+        '<br><span style="font-size:12.5px">批次 ' + esc(j.batch) + '　到期 ' +
+        (j.expireAt ? esc(when(j.expireAt)) : '永久') + '</span></div>' +
+        '<textarea id="cdkText" readonly rows="' + rows + '" class="mono" ' +
+        'style="margin-top:9px;font-size:12.5px;line-height:1.75">' +
+        esc(j.pretty.join('\n')) + '</textarea>' +
+        '<button class="btn sm" style="margin-top:8px" onclick="copyCdk()">一键复制全部</button>' +
+        '<div class="dd" style="font-size:12px;color:var(--ink3);margin-top:9px;line-height:1.7">' +
+        '复制后直接贴给买家。记得补一句：<b>一码只能用一次，别转发给别人。</b></div>';
+      toast('生成了 ' + j.codes.length + ' 个码');
+      loadCdk();
+    })
+    .catch(function (e) {
+      $('cdkOut').innerHTML = '<div class="alert err" style="margin-top:11px">网络不通：' +
+        esc(e.message || e) + '</div>';
+    });
+}
+
+function copyCdk() {
+  var el = $('cdkText');
+  if (!el) { toast('先点生成'); return; }
+  copy(el.value, '已复制全部兑换码');
+}
+
+/* 码库统计：还剩多少没卖、卖出去多少、哪些批次快到期。
+   ★ 批次列表画成**默认收起**的折叠块，展开某批才去拉那一批的码 ——
+     这一页刚因为「越用越长」被优化过，别再堆回去。
+   ★ 关键数字是「还没发出去」：拿货时真正要盯的就是它。 */
+function loadCdk() {
+  var t = token();
+  if (!t) return;
+  fetch('/api/admin/cdks?limit=20', { headers: { 'x-admin-token': t } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) {
+        $('cdkStat').innerHTML = '<div class="alert err" style="margin-top:11px">' +
+          esc(j.error || '读不到码库') + '</div>';
+        return;
+      }
+      var h = '<div class="row" style="margin-top:12px;border-top:1px solid #f2f5f8;padding-top:11px">' +
+              '<span class="k">码库总数</span><span class="v">' + j.total + '</span></div>' +
+              '<div class="row"><span class="k">已兑换</span><span class="v">' + j.used + '</span></div>' +
+              '<div class="row"><span class="k">★ 还能发给顾客</span><span class="v">' +
+                (j.available || 0) + '</span></div>' +
+              '<div class="row"><span class="k">已标记发给顾客</span><span class="v">' + (j.sent || 0) + '</span></div>' +
+              '<div class="row"><span class="k">还没兑出去</span><span class="v">' + j.unused + '</span></div>';
+      if (j.expired) {
+        h += '<div class="row"><span class="k" style="color:#9a3412">已过期（没兑）</span>' +
+             '<span class="v" style="color:#9a3412">' + j.expired + '</span></div>';
+      }
+      if (!j.total) {
+        h += '<div class="dd" style="font-size:12.5px;color:var(--ink3);margin-top:9px">' +
+             '还没有生成过 CDK。</div>';
+      }
+      $('cdkStat').innerHTML = h;
+      renderHist(j.batches || []);
+    })
+    .catch(function () { /* 静默：这是附带统计，读不到不该盖住上面的成功提示 */ });
+}
+
+/* 记住哪些批次是展开的 —— 标记/刷新之后别把人家刚展开的那批收回去 */
+var OPEN_BATCHES = {};
+/* 渲染出的码按 code 存一份，供 markSent 取当前备注（避免把用户文本拼进 HTML 属性） */
+var CODE_CACHE = {};
+
+function renderHist(batches) {
+  var box = $('cdkHist');
+  if (!box) return;
+  if (!batches.length) {
+    box.innerHTML = '<div class="hint">还没有批次可看。' +
+      '生成一批码之后，这里会出现它的全部码和状态。</div>';
+    return;
+  }
+  var h = '<div class="hint" style="margin:0 0 8px">共 ' + batches.length +
+          ' 批（显示最近 ' + Math.min(batches.length, 12) + ' 批）。展开某批即可看到它的全部码。</div>';
+  batches.slice(0, 12).forEach(function (b) {
+    /* 「还能发」用服务端算好的 available —— 它就是 copyUnsent 会复制出来的个数。
+       ⚠️ 别在这减 total-sent：那样已兑掉但没标记的码会被算成「还能发」，
+          于是你以为手上还有货（真踩到过）。 */
+    var able = (b.available == null) ? '?' : b.available;
+    h += '<details class="fold" id="d-' + esc(b.batch) + '" data-batch="' + esc(b.batch) +
+         '" ontoggle="onBatchToggle(\'' + esc(b.batch) + '\', this.open)">' +
+           '<summary>' + (b.label ? esc(b.label) : '批次 ' + esc(b.batch)) +
+             '<span class="ds">' + (b.times || '?') + ' 次/个 · 已用 ' + b.used + '/' + b.total +
+             ' · 还能发 ' + able + ' 个 · ' +
+             (b.expireAt ? esc(when(b.expireAt)) + ' 到期' : '永久') + '</span>' +
+           '</summary>' +
+           '<div class="fold-b" id="b-' + esc(b.batch) + '"></div>' +
+         '</details>';
+  });
+  box.innerHTML = h;
+  /* 之前展开过的批次原样展开回来 */
+  Object.keys(OPEN_BATCHES).forEach(function (b) {
+    var d = $('d-' + b);
+    if (!d) return;
+    try { d.open = true; } catch (e) {}
+    loadBatch(b);
+  });
+}
+
+function onBatchToggle(batch, open) {
+  if (open) { OPEN_BATCHES[batch] = 1; loadBatch(batch); }
+  else { delete OPEN_BATCHES[batch]; }
+}
+
+/* 拉某一批的全部码（**完整码**，不是总览里那种脱敏的） */
+function loadBatch(batch) {
+  var t = token();
+  var box = $('b-' + batch);
+  if (!t || !box) return;
+  box.innerHTML = '<div class="hint">读取中…</div>';
+  fetch('/api/admin/cdks/batch?batch=' + encodeURIComponent(batch), { headers: { 'x-admin-token': t } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) { box.innerHTML = '<div class="alert err">' + esc(j.error || '读不到这一批') + '</div>'; return; }
+      box.innerHTML = codeListHtml(j.codes, j.meta);
+    })
+    .catch(function () { box.innerHTML = '<div class="alert err">读不到这一批（网络或口令问题）</div>'; });
+}
+
+/* 一批码的渲染。meta 有值时额外给一行「复制本批还能发的码」。 */
+function codeListHtml(codes, meta) {
+  if (!codes || !codes.length) return '<div class="hint">这一批没有码。</div>';
+  var h = '';
+  if (meta) {
+    h += '<div class="hint" style="margin:0 0 8px">共 ' + meta.total + ' 个 · 已用 ' + meta.used +
+         ' · 已标记发出 ' + meta.sent + ' · <b>还能发 ' + meta.available + ' 个</b></div>' +
+         '<button class="btn ghost sm" onclick="copyUnsent(\'' + esc(meta.batch) + '\')">' +
+         '复制本批还能发的码</button><div style="height:9px"></div>';
+  }
+  codes.forEach(function (c) { CODE_CACHE[c.code] = c; h += codeRowHtml(c); });
+  return h;
+}
+
+function codeRowHtml(c) {
+  var st = c.used ? '<span class="pill p-paid">已兑</span>'
+         : c.disabled ? '<span class="pill p-used">已作废</span>'
+         : c.expired ? '<span class="pill p-used">已过期</span>'
+         : '<span class="pill p-open">未兑</span>';
+  var metaBits = [c.times + ' 次'];
+  if (c.used && c.usedAt) metaBits.push(esc(when(c.usedAt)) + ' 被兑换');
+  if (!c.used && c.expireAt) metaBits.push(esc(when(c.expireAt)) + ' 到期');
+  return '<div class="cdkrow">' +
+    '<div class="c1"><span class="cc">' + esc(c.pretty || c.code) + '</span>' + st +
+      (c.sentTo ? '<span class="sent">已发：' + esc(c.sentTo) + '</span>' : '') + '</div>' +
+    '<div class="c2"><span class="meta">' + metaBits.join(' · ') + '</span>' +
+      '<button class="btn ghost sm" onclick="copy(\'' + esc(c.pretty || c.code) +
+        '\',\'兑换码已复制\')">复制</button>' +
+      '<button class="btn ghost sm" onclick="markSent(\'' + esc(c.code) + '\')">' +
+        (c.sentTo ? '改备注' : '标记已发') + '</button>' +
+    '</div></div>';
+}
+
+/* 按码查找：顾客往往只报得到前几位，所以走前缀匹配（服务端做） */
+function searchCdk() {
+  var t = token();
+  if (!t) { toast('先填管理口令'); return; }
+  var q = ($('cdkQ').value || '').trim();
+  if (!q) { loadCdk(); return; }
+  $('cdkHist').innerHTML = '<div class="hint">查找中…</div>';
+  fetch('/api/admin/cdks/batch?q=' + encodeURIComponent(q), { headers: { 'x-admin-token': t } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) throw new Error(j.error || '查找失败');
+      if (!j.total) {
+        $('cdkHist').innerHTML = '<div class="hint">没找到以「' + esc(q) + '」开头的码。' +
+          ' <button class="btn ghost sm" onclick="loadCdk()">回到批次列表</button></div>';
+        return;
+      }
+      $('cdkHist').innerHTML = '<div class="hint" style="margin:0 0 8px">找到 ' + j.total +
+        ' 个（列出前 ' + j.shown + ' 个）' +
+        ' <button class="btn ghost sm" onclick="loadCdk()">回到批次列表</button></div>' +
+        codeListHtml(j.codes, null);
+    })
+    .catch(function (e) {
+      $('cdkHist').innerHTML = '<div class="alert err">' + esc(e.message || '查找失败') + '</div>';
+    });
+}
+
+/* 复制「这一批还能发给顾客」的码 —— 拿货发单时最常用的一步。
+   ⚠️ 筛选条件必须和汇总里的 available 完全一致（服务端 cdkAvailable）：
+      已兑过的、已标记发过的、已作废的、已过期的，一个都不能混进来。 */
+function copyUnsent(batch) {
+  var t = token();
+  if (!t) return;
+  fetch('/api/admin/cdks/batch?batch=' + encodeURIComponent(batch), { headers: { 'x-admin-token': t } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) throw new Error(j.error || '读不到这一批');
+      var pool = (j.codes || []).filter(function (c) {
+        return !c.used && !c.sentTo && !c.expired && !c.disabled;
+      });
+      if (!pool.length) { toast('这一批没有可发的码了'); return; }
+      copy(pool.map(function (c) { return c.pretty || c.code; }).join('\n'),
+           '已复制 ' + pool.length + ' 个还能发的码');
+    })
+    .catch(function (e) { toast('复制失败：' + (e.message || '')); });
+}
+
+/* 标记这个码发给了谁。**纯备注**，不参与任何校验，也不影响兑换。
+   为什么必须有：一批 10 个码、发出去 3 个但顾客都还没兑，过两天就分不清哪 3 个发过了 ——
+   很容易把同一个码发给两个人，谁先兑谁拿到，另一个当场被拒。 */
+function markSent(code) {
+  var t = token();
+  if (!t) return;
+  var cur = (CODE_CACHE[code] && CODE_CACHE[code].sentTo) || '';
+  var who = window.prompt('这个码发给了谁？（名字 / 平台昵称 / 订单号都行，留空 = 取消标记）', cur);
+  if (who === null) return;                       /* 点了取消 */
+  fetch('/api/admin/cdks/mark', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-admin-token': t },
+    body: JSON.stringify({ token: t, code: code, sentTo: String(who).trim() })
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) throw new Error(j.error || '标记失败');
+      toast(j.sentTo ? '已标记：' + j.sentTo : '已取消标记');
+      var b = CODE_CACHE[code] && CODE_CACHE[code].batch;
+      if (b) loadBatch(b);                        /* 这一批的按钮/计数跟着更新 */
+      loadCdk();                                  /* 顶部的「还没发出去」也要跟着变 */
+      if (b && $('d-' + b)) { try { $('d-' + b).open = true; } catch (e) {} }
+    })
+    .catch(function (e) { toast('标记失败：' + (e.message || '')); });
+}
+
+/* 导出整库：把线上这份码库（含「谁兑过」）下载成一个 JSON 文件。
+   为什么必须有：本地 match/data/cdks.json 里只有「码」，没有「谁兑过」；
+   而发布会拿本地这份覆盖线上 —— 覆盖之后已兑过的码会复活成未使用。
+   所以发布前先用这个按钮把线上状态导出来，覆盖本地的那个文件。
+   （在电脑上更省事的做法：node scripts/cdk_pull_live.js —— 它会自动做同样的事，
+     还带三道防拉错的闸。手机上就用这个按钮。） */
+function exportCdk() {
+  var t = token();
+  if (!t) return;
+  $('cdkOut').innerHTML = '<div class="foot" style="margin-top:10px">正在导出…</div>';
+  fetch('/api/admin/cdks/export', { headers: { 'x-admin-token': t } })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) throw new Error(j.error || '导出失败');
+      var name = 'cdks_' + new Date().toISOString().slice(0, 19).replace(/[-:T]/g, '') + '.json';
+      var text = JSON.stringify(j.library || {}, null, 2);
+      var url = URL.createObjectURL(new Blob([text], { type: 'application/json' }));
+      var a = document.createElement('a');
+      a.href = url; a.download = name;
+      document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 3000);
+      $('cdkOut').innerHTML = '<div class="alert ok" style="margin-top:11px">' +
+        '已导出 <b>' + j.total + '</b> 个码（其中已兑 <b>' + j.used + '</b>）。<br>' +
+        '文件名 <span class="mono">' + esc(name) + '</span> —— ' +
+        '把它放回 <span class="mono">match/data/cdks.json</span> 再发布。' +
+        '<br><span style="font-size:12.5px">没放回去就发布的话，已兑过的码会复活成未使用。</span></div>';
+    })
+    .catch(function (e) {
+      $('cdkOut').innerHTML = '<div class="alert err" style="margin-top:11px">网络不通：' +
+        esc(e.message || e) + '</div>';
+    });
+}
+
+/* 停掉 / 恢复某台设备的「自助到账」。
+   自助是先给货后对账，所以核对到跑单就得能一键停掉。
+   注意：只影响自助放行 —— 人工确认那条路永远开着，误停了还能救回来。 */
+function blockDev(deviceId, blocked) {
+  var t = token();
+  if (!t) { notice('err', '先填管理口令。'); return; }
+  var why = '';
+  if (!blocked) {
+    why = window.prompt('为什么停掉这台设备的自助放行？（如：账单里查不到这笔）', '账单里查不到这笔');
+    if (why === null) return;
+  }
+  fetch('/api/admin/block', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ token: t, deviceId: deviceId, unblock: !!blocked, reason: why })
+  })
+    .then(function (r) { return r.json(); })
+    .then(function (j) {
+      if (!j.ok) { toast(j.error || '没成功'); return; }
+      toast(blocked ? '已恢复该设备的自助放行' : '已停掉该设备的自助放行');
+      load();
+    })
+    .catch(function (e) { toast('网络不通：' + (e.message || e)); });
+}
+
+function orderCard(o) {
+  var st = o.status;
+  var pill = st === 'pending' ? '<span class="pill p-pending">待核对到账</span>'
+    : st === 'paid' ? '<span class="pill p-paid">已收款</span>'
+      : st === 'unlocked' ? '<span class="pill p-paid">已解锁</span>'
+        : '<span class="pill p-used">已解锁</span>';
+
+  var h = '<div class="card">';
+  h += '<div class="ohead"><div><div class="oid">' + esc(o.orderId) + '</div>' +
+       '<div class="otime">' + when(o.createdAt) +
+       (o.unlockedAt ? ' · 解锁于 ' + when(o.unlockedAt) : '') +
+       (o.recovered ? ' · 订单表里没这单' : '') + '</div></div>' +
+       '<div style="text-align:right">' + pill + '<div class="amt">' + money(o.amount) + '</div></div></div>';
+  h += '<div class="row"><span class="k">套餐</span><span class="v">' +
+       esc(o.plan || '') + ' · ' + o.times + ' 次</span></div>';
+  h += '<div class="row"><span class="k">设备</span><span class="v mono" style="font-size:12px">' +
+       esc(String(o.deviceId || '').slice(0, 16)) + '…</span></div>';
+  /* 自助放行的单要显眼标出来 —— 它们是「先给货后对账」，必须回账单里核一遍 */
+  if (o.selfServe) {
+    h += '<div class="row"><span class="k">放行方式</span><span class="v" style="color:#9a3412">' +
+         '自助放行（已自动给货）' + (o.selfServeAt ? ' · ' + when(o.selfServeAt) : '') + '</span></div>';
+  }
+  if (o.blocked) {
+    h += '<div class="row"><span class="k">风控</span><span class="v" style="color:#9a3412">' +
+         '这台设备的自助放行已停用</span></div>';
+  }
+
+  if (st === 'pending') {
+    h += '<button class="btn sm" style="width:100%;margin-top:11px" onclick="confirmOne(\'' +
+         esc(o.orderId) + '\')">我已收到钱 · 解锁次数</button>';
+    h += '<div class="foot" style="margin-top:8px;text-align:left">点完就没有下一步了 —— 次数直接加到下单那台设备上。</div>';
+  } else if (st === 'unlocked') {
+    h += '<div class="alert ok" style="margin:11px 0 0">次数已加到用户设备，正常流程到此结束。</div>';
+    if (o.code) {
+      h += '<details style="margin-top:9px"><summary style="cursor:pointer;font-size:12.5px;color:var(--ink3);padding:4px 0">用户换了手机？把兑换码给他</summary>' +
+        '<div class="codebox"><div class="codelabel">兑换码</div><div class="code">' + esc(o.code) + '</div>' +
+        '<button class="btn sm" style="width:100%;margin-top:11px" onclick="copyReply(\'' +
+        esc(o.code) + '\',\'' + esc(o.orderId) + '\')">复制发给用户的话</button></div></details>';
+    }
+  } else if (o.code) {
+    h += '<div class="codebox"><div class="codelabel">兑换码</div>' +
+         '<div class="code">' + esc(o.code) + '</div>' +
+         '<button class="btn sm" style="width:100%;margin-top:11px" onclick="copyReply(\'' +
+         esc(o.code) + '\',\'' + esc(o.orderId) + '\')">复制发给用户的话</button></div>';
+  }
+  /* 风控入口：自助是先给货后对账，核对到跑单要能一键停掉 */
+  if (o.deviceId) {
+    h += '<button class="btn ghost sm" style="width:100%;margin-top:7px" onclick="blockDev(\'' +
+         esc(o.deviceId) + '\',' + (o.blocked ? 'true' : 'false') + ')">' +
+         (o.blocked ? '恢复这台设备的自助放行' : '停掉这台设备的自助放行') + '</button>';
+  }
+  h += '</div>';
+  return h;
+}
+
+function copyReply(code, orderId) {
+  var txt = '你好，已经核对到你的付款啦～\n' +
+    '正常情况你那边次数已经自动加上了，你什么都不用做。\n' +
+    '如果换了手机、或者次数没跟过来，把下面这两样一起填进' +
+    '「换了手机、次数没跟过来？」那一栏，就能把次数领过去：\n' +
+    '订单号：' + orderId + '\n兑换码：' + code +
+    '\n（注意：必须两样一起填，只填兑换码领不了）有问题随时找我。';
+  copy(txt, '回复话术已复制');
+}
+
+function render() {
+  var pending = ORDERS.filter(function (o) { return o.status === 'pending' || o.status === 'paid'; });
+  var unlocked = ORDERS.filter(function (o) { return o.status === 'unlocked'; });
+  var h = '';
+
+  h += '<div class="sec">待核对到账 ' + pending.length + '</div>';
+  h += pending.length ? pending.map(orderCard).join('')
+    : '<div class="card"><div class="empty">没有待核对的订单。<br>用户付完款点「我付好了」后，这里就会出现。</div></div>';
+
+  if (unlocked.length) {
+    /* 已解锁的单只会越积越多（每卖一单多一张卡），默认折起来，
+       需要回查时点一下。摘要行里保留数量，所以一眼还能看到大概卖了多少单。
+       ⚠️ 折叠只是视觉上的：卡片还在 DOM 里，所以「有几张卡」这类断言照样成立。
+       ⚠️ 必须带 id="foldOrders" —— 页面上还有另一个 .fold（应急通道，静态写在 HTML 里），
+         按 `.fold` 取第一个会取错，真机核验就白做了。 */
+    h += '<details class="fold" id="foldOrders">'
+       + '<summary>已解锁 ' + unlocked.length + ' 单</summary>'
+       + '<div class="fold-b">'
+       + unlocked.slice(0, 30).map(orderCard).join('')
+       + (unlocked.length > 30 ? '<div class="empty">只显示最近 30 单</div>' : '')
+       + '</div></details>';
+  }
+  if (!ORDERS.length) {
+    h = '<div class="sec">订单</div><div class="card"><div class="empty">还没有任何订单。</div></div>';
+  }
+  $('body').innerHTML = h;
+}
+
+/* 进页面：有存过的口令就自动拉一次 */
+(function init() {
+  var t = '';
+  try { t = localStorage.getItem(K) || ''; } catch (e) {}
+  if (t) { $('tok').value = t; load(); }
+  else notice('info', '第一次用：把服务端 <b>ADMIN_TOKEN</b> 的值填进来，点「加载数据」。');
+})();
+</script>
+</body>
+</html>

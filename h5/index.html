@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#22292f">
+<title>相亲合拍率 · 择偶定位与合盘判断</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ 顶栏 ============ -->
+<div class="top" id="top">
+  <div class="back hide" id="backBtn" onclick="goBack()">
+    <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+  </div>
+  <div class="ttl" id="topTitle">相亲合拍率</div>
+</div>
+
+<!-- ============ 首页 ============ -->
+<div id="screen-home" class="wrap">
+  <div class="hero">
+    <span class="pill">S U Z H O U · 择偶定位</span>
+    <h1>你在这段关系里<br>是优选，还是高攀？</h1>
+    <p>填入你与对方的真实条件，系统按相亲市场的真实权重，算出你处在对方择偶范围的哪一档。</p>
+  </div>
+
+  <div class="sec-title">第一步 · 建立档案</div>
+  <div class="card" id="myCard"></div>
+
+  <div class="sec-title">第二步 · 对方档案</div>
+  <div class="plist" id="otherList"></div>
+  <button class="btn ghost sm" style="margin-top:10px" onclick="openForm('other')">＋ 新增对方档案</button>
+
+  <div class="sec-title">五档结论说明</div>
+  <div class="card">
+    <div class="tier-legend" id="legend"></div>
+  </div>
+
+  <p class="footnote">
+    本工具基于公开的相亲市场规则建模，结果仅供参考，不构成对任何人的评价。<br>
+    数据仅保存在你的手机本地，不会上传。
+  </p>
+</div>
+
+<!-- ============ 表单页 ============ -->
+<div id="screen-form" class="wrap hide">
+  <div class="seg" id="genderSeg"></div>
+  <div id="formBody"></div>
+</div>
+
+<!-- ============ 结果页 ============ -->
+<div id="screen-result" class="wrap hide"></div>
+
+<div class="dock hide" id="dock"><div class="wrap" id="dockInner"></div></div>
+<div class="toast" id="toast"></div>
+
+<script src="questions.js"></script>
+<script src="engine.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

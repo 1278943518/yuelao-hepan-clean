@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<!-- build: 2026-09-26T14:58+08:00 (规则库 v4 · 报告合一 · CDK 兑换 · 免输入自动解锁 · IP+设备限流 · 署名Ice icy · 一键填写 · 提示精简 · 多档案隔离 · 颜值/学历档位口径统一 · 星盘合并进主入口 · 扣次前确认 · 免费次数5→3 · 次数角标统一「我的次数：x次」 · 星盘不足降级保留总分 · 星盘页角标点击先切回月老再进购买页) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>月老合盘 · 相亲合拍分析</title>
+<link rel="icon" href="favicon.ico?v=2" sizes="any">
+<link rel="icon" href="icon-32.png?v=2" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png?v=2">
+<meta name="theme-color" content="#f97316">
+<meta name="apple-mobile-web-app-title" content="月老合盘">
+<style>
+:root{--ink:#17191c;--ink2:#4c545d;--ink3:#8a929b;--line:#e5e9ee;--bg:#f4f6f8;--card:#fff;
+--accent:#f97316;--good:#16a34a;--warn:#ca8a04;--risk:#dc2626;--ok:#2563eb;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.78;
+font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 90px}
+header{padding:20px 0 8px}
+.hd{display:flex;align-items:center;gap:11px}
+.logo{width:36px;height:36px;flex:0 0 36px;border-radius:10px;display:block;object-fit:cover}
+header h1{font-size:21px;margin:0 0 3px;font-weight:700;letter-spacing:.5px}
+header p{margin:0;font-size:12.5px;color:var(--ink3)}
+.hide{display:none!important}
+.sec{font-size:12.5px;font-weight:600;color:var(--ink3);margin:20px 0 8px;letter-spacing:.4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.pcard{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pcard .nm{font-weight:600;font-size:15px}
+.pcard .sm{font-size:12.5px;color:var(--ink3);margin-top:2px;line-height:1.5}
+.pcard .go{color:var(--accent);font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
+.pcard .go.mute{color:var(--ink3);font-weight:400}
+.acts{display:flex;gap:14px;align-items:center}
+button{font-family:inherit}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:var(--accent);color:#fff;
+font-size:16px;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.45}
+.btn.ghost{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.btn.sm{padding:10px;font-size:14px}
+.q{margin-bottom:20px}
+.q .lb{font-size:14.5px;font-weight:600;margin-bottom:3px}
+.q .hint{font-size:12px;color:var(--ink3);margin-bottom:8px;line-height:1.5}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:9px 14px;border:1px solid var(--line);border-radius:9px;background:#fff;
+font-size:13.5px;color:var(--ink2);cursor:pointer}
+.opt.on{border-color:var(--accent);background:#fff7ed;color:#c2410c;font-weight:600}
+.opt.wide{flex:1 1 46%}
+input[type=number], input[type=text], textarea{width:100%;padding:11px 13px;border:1px solid var(--line);
+border-radius:9px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff;line-height:1.6}
+input[type=number]{font-family:ui-monospace,Consolas,monospace}
+input:focus, textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+textarea{resize:vertical;min-height:96px}
+input::placeholder, textarea::placeholder{color:#b6bcc4;font-size:13.5px}
+.rgr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rgr label{font-size:12px;color:var(--ink3);display:block;margin-bottom:3px}
+.big{text-align:center;padding:20px 0 8px}
+.big .n{font-size:54px;font-weight:800;line-height:1;color:var(--accent)}
+.big .n small{font-size:16px;color:var(--ink3);font-weight:600}
+.big .v{font-size:17px;font-weight:700;margin-top:10px}
+.big .s{font-size:13.5px;color:var(--ink2);margin-top:7px;line-height:1.7;text-align:left}
+.bar{height:9px;background:#eef1f5;border-radius:5px;overflow:hidden;margin-top:14px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #f2f5f8;font-size:13.5px}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink3);flex:0 0 auto}
+.row .v{font-weight:600;text-align:right}
+.blk{margin-bottom:14px}
+.blk:last-child{margin-bottom:0}
+.blk .tt{font-size:14px;font-weight:600;margin-bottom:5px}
+.blk .dd{font-size:13.5px;color:var(--ink2);line-height:1.75}
+.arw{color:var(--accent);font-weight:700}
+.tagline{display:inline-block;font-size:12px;padding:2px 10px;border-radius:20px;background:#eef1f5;color:var(--ink2);margin:0 6px 6px 0}
+.tip{display:flex;gap:9px;font-size:13.5px;color:var(--ink2);margin-bottom:9px;line-height:1.7}
+.tip .ic{flex:0 0 20px;height:20px;border-radius:6px;background:var(--ink3);color:#fff;
+font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700;margin-top:3px}
+.ic-hard{background:var(--risk)}.ic-soft{background:var(--warn)}.ic-gap{background:var(--good)}
+.ic-route{background:var(--good)}.ic-note{background:var(--accent)}.ic-ok{background:var(--ink3)}
+.ai{background:#fffaf5;border:1px solid #fde3c8}
+.ai h3{margin:0 0 12px;font-size:15px;color:#c2410c}
+.li{position:relative;padding-left:16px;margin-bottom:8px;font-size:13.5px;color:var(--ink2);line-height:1.7}
+.li:before{content:'';position:absolute;left:4px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+details{margin-top:6px}
+summary{font-size:12.5px;color:var(--ink3);cursor:pointer;padding:6px 0;outline:none}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--ink3)}
+.foot{text-align:center;font-size:11.5px;color:var(--ink3);margin-top:22px;line-height:1.7}
+.rights{margin-top:10px;font-size:11px;letter-spacing:.4px;color:var(--ink3);opacity:.75}
+.locknote{padding:14px 0;text-align:center;font-size:13.5px;color:var(--ink3);
+  border:1px dashed #dfe4ea;border-radius:10px;background:#fafbfc;letter-spacing:.5px}
+.locknote::before{content:"🔒";display:block;font-size:17px;margin-bottom:6px;opacity:.6}
+
+/* ---------- 一键填写：一整段粘贴自动分栏 ---------- */
+.af{margin-bottom:24px;padding:15px;border:1px solid #dfe4ea;border-radius:12px;
+  background:linear-gradient(180deg,#fcfdff,#f6f8fb)}
+.af .lb{font-size:14.5px;font-weight:600;margin-bottom:10px}
+.af textarea{min-height:84px}
+.afchk{display:flex;align-items:center;gap:7px;margin:9px 0;font-size:12.5px;
+  color:var(--ink2);cursor:pointer;-webkit-user-select:none;user-select:none}
+.afchk input{flex:0 0 auto;width:15px;height:15px;margin:0;accent-color:var(--accent);cursor:pointer}
+.afmsg{display:none;margin-top:10px;padding:10px 12px;border-radius:9px;background:#fff;
+  border:1px solid var(--line);font-size:12.5px;line-height:1.7;color:var(--ink2)}
+.afmsg.on{display:block}
+.afmsg.warn{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.afmsg.bad{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+.toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%);background:rgba(23,25,28,.93);
+color:#fff;padding:10px 18px;border-radius:22px;font-size:13.5px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:99;max-width:80vw;text-align:center}
+.toast.on{opacity:1}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);
+border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:7px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ---------- 右上角剩余次数 ---------- */
+header{position:relative}
+.qt{position:absolute;right:0;top:22px}
+.qb{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;
+padding:6px 12px;border-radius:20px;background:#fff7ed;color:#c2410c;border:1px solid #fde3c8;
+cursor:pointer;white-space:nowrap}
+.qb-n{font-size:14px;font-weight:800}
+.qb-out{background:#f4f6f8;color:var(--ink2);border-color:var(--line)}
+.qb-beta{background:#eef4ff;color:#1d4ed8;border-color:#c7d9fe;cursor:default}
+
+/* ---------- 完整报告 ---------- */
+.report .rp{margin:0 0 15px;font-size:14.5px;line-height:1.95;color:var(--ink)}
+.report .rp:last-child{margin-bottom:0}
+.report .rp-lead{font-size:15px;color:#c2410c;font-weight:500}
+.rpgate{height:0}
+
+/* ---------- 付费墙 ---------- */
+.pw{margin-top:16px;padding-top:16px;border-top:1px dashed #fde3c8}
+.pw-t{font-size:14.5px;font-weight:700;color:#c2410c;margin-bottom:8px}
+.pw-l{margin:0 0 14px;padding-left:18px;font-size:13.5px;color:var(--ink2);line-height:1.9}
+.pw-l li{margin-bottom:2px}
+.pw-n{font-size:12px;color:var(--ink3);text-align:center;margin-top:10px;line-height:1.7}
+
+/* ---------- 精简版要点卡 ---------- */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.pi{background:#f8fafc;border-radius:10px;padding:10px 12px}
+.pk{font-size:11.5px;color:var(--ink3);margin-bottom:3px}
+.pv{font-size:14px;font-weight:700}
+.oneline{font-size:13.5px;color:var(--ink2);line-height:1.75}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:10px;
+padding:7px 0;border-bottom:1px solid #f6f8fa;font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv>span{color:var(--ink3)}
+.kv>b{font-weight:600}
+.gapkv{display:grid;grid-template-columns:1fr auto auto;gap:10px}
+.gapkv>em{font-style:normal;font-size:12px;color:var(--ink3);min-width:44px;text-align:right}
+
+/* ---------- 充值 / 兑换页 ---------- */
+/* CDK 兑换（2026-09-21 起的收费方式：成交在第三方平台，本站只负责兑换） */
+.cdk-t{font-size:15px;font-weight:600;margin-bottom:4px}
+.cdk-d{font-size:12.5px;color:var(--ink3);line-height:1.65;margin-bottom:11px}
+.cdk-in{font-family:ui-monospace,Consolas,monospace;font-size:17px;letter-spacing:1.5px;
+  text-align:center;text-transform:uppercase}
+.cdkmsg{margin-top:11px;padding:11px 13px;border-radius:10px;font-size:13px;line-height:1.7}
+.cdkmsg.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
+.cdkmsg.err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c}
+.wxbox{margin-top:11px;padding:12px 14px;border-radius:10px;background:#f8fafc;border:1px solid var(--line)}
+.wx-l{font-size:11.5px;color:var(--ink3);margin-bottom:3px}
+.wx-v{font-family:ui-monospace,Consolas,monospace;font-size:14px;font-weight:600;
+  color:var(--ink);word-break:break-all;-webkit-user-select:all;user-select:all}
+.qr-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.qr-n{font-size:38px;font-weight:800;line-height:1;color:var(--accent)}
+.qr-l{font-size:12.5px;color:var(--ink3);margin-top:5px}
+.qr-r{font-size:12.5px;color:var(--ink2);text-align:right;max-width:52%;line-height:1.6}
+.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.plan{position:relative;border:1.5px solid var(--line);border-radius:12px;padding:14px 8px 12px;
+text-align:center;cursor:pointer;background:#fff}
+.plan.on{border-color:var(--accent);background:#fff7ed}
+.pflag{position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+background:var(--accent);color:#fff;font-size:10px;font-weight:700;
+padding:2px 8px;border-radius:9px;white-space:nowrap}
+.pn{font-size:13px;font-weight:600;margin-bottom:6px}
+.pp{font-size:19px;font-weight:800;color:var(--accent);line-height:1.2}
+.pp .pu{font-size:11px;color:var(--ink3);font-weight:400}
+.pd{font-size:11px;color:var(--ink3);margin-top:5px;line-height:1.4}
+.paybox{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.payq{text-align:center}
+.payq img{width:100%;max-width:190px;border-radius:10px;border:1px solid var(--line);display:block;margin:0 auto;background:#fff}
+.payl{font-size:12.5px;color:var(--ink3);margin-top:7px}
+.paymiss{width:100%;max-width:190px;margin:0 auto;height:190px;border:1px dashed var(--line);
+border-radius:10px;display:flex;align-items:center;justify-content:center;
+font-size:12.5px;color:var(--ink3);line-height:1.7;text-align:center;background:#fafbfc}
+/* 二级页顶部条：返回键固定左上角 + 页面名居中（与星盘合盘一致） */
+.subbar{position:fixed;left:0;right:0;top:0;z-index:95;height:52px;background:rgba(255,255,255,.98);
+border-bottom:1px solid var(--line)}
+.subbar .in{position:relative;height:100%;max-width:640px;margin:0 auto;padding:0 16px;
+display:flex;align-items:center;justify-content:center}
+.subbar .subttl{font-size:16.5px;font-weight:700;color:var(--ink);letter-spacing:.3px;text-align:center}
+.subbar .xpback{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;
+display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);
+border-radius:50%;cursor:pointer;color:var(--ink);padding:0;-webkit-tap-highlight-color:transparent}
+.subbar .xpback svg{width:19px;height:19px}
+.subbar .xpback:active{background:#fff7ed;color:var(--accent)}
+.wrap.sub{padding-top:62px}
+
+/* ---------- 底部导航（月老 / 星盘） ---------- */
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 118px}
+.tabbar{position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;background:rgba(255,255,255,.97);
+border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px)}
+.tab{flex:1;text-align:center;padding:9px 0 8px;color:var(--ink3);font-size:12px;font-weight:600;cursor:pointer}
+.tab svg{width:21px;height:21px;display:block;margin:0 auto 1px;fill:none;stroke:currentColor;stroke-width:2}
+.tab.on{color:var(--accent)}
+/* 星盘页头剩余次数角标 */
+.qt{position:absolute;right:0;top:20px}
+/* 星盘页头剩余次数角标：#xp-quotaBadge 只是容器，内容由 renderQuotaBadge 写入
+   与月老同款的 .qb 徽章（文案「我的次数：x次」、点击 openPay）——
+   不再单独定义 badge 样式，形状/大小/配色自动与月老页完全一致 */
+.dmbadge{display:inline-block;vertical-align:4px;margin-left:8px;font-size:10px;font-weight:800;letter-spacing:1px;
+color:#c2410c;background:#fff7ed;border:1px solid #fde3c8;border-radius:6px;padding:1px 6px}
+/* 二级页顶部条（月老/星盘共用）：返回键固定左上角 + 页面名居中，不随页面滚动
+   ⚠️ 星盘源文件自带的 <style> 不进合并页，样式要在月老 index.html 和这里各写一份 */
+.subbar{position:fixed;left:0;right:0;top:0;z-index:95;height:52px;background:rgba(255,255,255,.98);
+border-bottom:1px solid var(--line)}
+.subbar .in{position:relative;height:100%;max-width:640px;margin:0 auto;padding:0 16px;
+display:flex;align-items:center;justify-content:center}
+.subbar .subttl{font-size:16.5px;font-weight:700;color:var(--ink);letter-spacing:.3px;text-align:center}
+.subbar .xpback{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;
+display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);
+border-radius:50%;cursor:pointer;color:var(--ink);padding:0;-webkit-tap-highlight-color:transparent}
+.subbar .xpback svg{width:19px;height:19px}
+.subbar .xpback:active{background:#fff7ed;color:var(--accent)}
+/* 星盘：select（月老样式里只有 input/textarea） */
+select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;
+font-size:15px;font-family:inherit;color:var(--ink);background:#fff;line-height:1.6}
+select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+.q .lb,.q .hint{display:block}
+.q .hint{font-size:12px;color:var(--ink3);margin-bottom:8px;line-height:1.5}
+.q{margin-bottom:16px}
+.wheelbox{overflow-x:auto;margin:4px -4px 0}
+.wheelbox svg{min-width:320px;width:100%;display:block}
+.asprow{display:flex;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid #f2f5f8;font-size:13.5px}
+.asprow:last-child{border-bottom:none}
+.asprow .sym{flex:0 0 22px;text-align:center;font-size:15px;font-weight:700}
+.asprow .txt{color:var(--ink2);line-height:1.65}
+.asprow .who{font-weight:600;color:var(--ink)}
+.s-harmony{color:var(--good)}.s-conflict{color:var(--risk)}.s-mix{color:var(--accent)}
+.loadbox{text-align:center;padding:52px 20px}
+.loadbox .spin{width:26px;height:26px;border-width:3px;border-color:rgba(249,115,22,.25);
+border-top-color:var(--accent);vertical-align:0;margin:0}
+.loadbox .lt{margin-top:18px;color:var(--ink);font-size:15px;font-weight:600;line-height:1.7}
+.loadbox .lh{margin-top:6px;color:var(--ink3);font-size:12.5px;line-height:1.7}
+.loadbox .bar{margin:18px auto 0;max-width:220px}
+.loadbox .bar i{animation:fill5 5s linear forwards}
+@keyframes fill5{from{width:0}to{width:100%}}
+.xtip{position:fixed;z-index:120;background:rgba(23,25,28,.94);color:#fff;font-size:12px;line-height:1.55;
+padding:7px 11px;border-radius:8px;pointer-events:none;opacity:0;transition:opacity .12s;max-width:74vw}
+.xtip.on{opacity:1}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{touch-action:manipulation;-webkit-touch-callout:none}
+.wheelbox svg,.tabbar{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+</style>
+</head>
+<body>
+  <div class="subbar hide" id="subbar">
+    <div class="in">
+      <button class="xpback" id="subBack" onclick="goHome()" aria-label="返回" title="返回">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12l7.5 7.5" fill="none" stroke="currentColor"
+          stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="subttl" id="subTitle"></div>
+    </div>
+  </div>
+
+<div class="wrap">
+  <div id="page-yue">
+
+
+  <header id="yueHead">
+    <div class="hd">
+      <img class="logo" src="logo.png?v=2" width="36" height="36" alt="月老合盘">
+      <div>
+        <h1>月老合盘</h1>
+        <p>2026 50万字大数据分析，最精准的合盘数据</p>
+      </div>
+    </div>
+    <div class="qt"><span id="authChip"></span><span id="quotaBadge"></span></div>
+  </header>
+
+  <section id="scr-home">
+    <div class="sec">我的档案</div>
+    <div id="meBox"></div>
+
+    <div class="sec">对方档案</div>
+    <div id="othersBox"></div>
+    <button class="btn ghost sm" style="margin-top:4px" onclick="addOther()">＋ 新增对方档案</button>
+
+    <div class="sec">开始分析</div>
+    <div id="runBox"></div>
+
+    <div class="sec">试试看</div>
+    <button class="btn ghost sm" onclick="fillSample('balanced')">示例：条件相当的一对</button>
+    <button class="btn ghost sm" style="margin-top:8px" onclick="fillSample('mismatch')">示例：差距较大的一对</button>
+
+    <div class="foot">你的档案只保存在这台设备上，不会被上传。<br>判断依据来自大量真人相亲案例的整理，结果仅供参考，不构成对任何人的评价。
+      <div class="rights">all rights reserved by 小红书 Ice icy</div></div>
+  </section>
+
+  <section id="scr-form" class="hide">
+    <div class="sec" id="formTitle"></div>
+    <div id="formBody"></div>
+    <button class="btn" onclick="saveForm()">保存档案</button>
+  </section>
+
+  <section id="scr-result" class="hide"></section>
+
+  <section id="scr-pay" class="hide"></section>
+
+  </div><!-- /page-yue -->
+
+  <div id="page-xing" class="hide">
+<header id="xp-spHead" style="position:relative">
+    <div class="hd">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="lgx" x1="0" y1="0" x2="0.35" y2="1">
+            <stop offset="0" stop-color="#fdba74"/>
+            <stop offset="1" stop-color="#ea580c"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="15" fill="url(#lgx)"/>
+        <circle cx="32" cy="32" r="12" fill="#fff"/>
+        <ellipse cx="32" cy="34" rx="20" ry="7" fill="none" stroke="#fff" stroke-width="3"
+          transform="rotate(-18 32 34)"/>
+        <circle cx="45" cy="21" r="3.2" fill="#fff"/>
+      </svg>
+      <div class="qt"><span id="xp-quotaBadge"></span></div>
+      <div>
+        <h1>星盘合盘<span class="dmbadge">DEMO</span></h1>
+        <p>占星 · 双人行星相位分析</p>
+      </div>
+    </div>
+  </header>
+<section id="xp-scr-home">
+    <div class="sec">我的星盘</div>
+    <div class="card"><div class="pcard">
+      <div><div class="nm" id="xp-meName">未填写</div><div class="sm" id="xp-meSm">出生日期 + 时间 + 城市</div></div>
+      <div class="go" onclick="XP.openForm('me')">填写 ›</div>
+    </div></div>
+
+    <div class="sec">对方的星盘</div>
+    <div class="card"><div class="pcard">
+      <div><div class="nm" id="xp-otName">未填写</div><div class="sm" id="xp-otSm">出生日期 + 时间 + 城市</div></div>
+      <div class="go" onclick="XP.openForm('ot')">填写 ›</div>
+    </div></div>
+
+    <div class="sec">开始合盘</div>
+    <button class="btn" id="xp-runBtn" onclick="XP.startRun()" disabled>开始合盘分析</button>
+
+    <div class="sec">完美配偶形象</div>
+    <div class="card"><div class="pcard">
+      <div><div class="nm">TA 长什么样、是什么性格</div>
+      <div class="sm">七宫头看正缘外貌 · 婚神星看性格与靠近方式</div></div>
+      <div class="go" id="xp-spouseGo" onclick="XP.startSpouse()">去算 ›</div>
+    </div></div>
+
+    <div class="sec">试试看</div>
+    <button class="btn ghost sm" onclick="XP.fillSample()">示例：填一对示例数据</button>
+
+    <div class="sec">怎么算的</div>
+    <div class="card">
+      <div class="tip"><div class="ic ic-note">1</div><div>输入双方出生年月日、时间与城市，本地实时计算太阳、月亮、水星、金星、火星、木星、土星的黄经位置；填了出生时间还会算<b>上升点</b>和整宫制<b>宫位</b>。</div></div>
+      <div class="tip"><div class="ic ic-note">2</div><div>把两人的行星两两交叉，找<b>合相 ☌ / 六合 ⚹ / 拱 △ / 刑 □ / 冲 ☍</b>五种相位——和谐相位加分，困难相位扣分但自带张力。</div></div>
+      <div class="tip"><div class="ic ic-note">3</div><div>按「吸引力 / 沟通 / 情感默契 / 长期相处」四个维度汇总出合盘分，全部计算在这台设备上完成，不上传任何数据。</div></div>
+    </div>
+
+    <div class="foot">你的档案只保存在这台设备上，不会被上传。<br>占星描述为框架化解读，不能替代真实的相处与了解。
+      <div class="rights">all rights reserved by 小红书 Ice icy</div></div>
+  </section>
+
+  <section id="xp-scr-form" class="hide">
+    <div class="sec" id="xp-formTitle"></div>
+    <div class="q"><div class="lb">称呼</div>
+      <input type="text" id="xp-fName" maxlength="12" placeholder="怎么称呼这个人"></div>
+    <div class="q"><div class="lb">出生日期</div>
+      <input type="date" id="xp-fDate" min="1900-01-01" max="2050-12-31"></div>
+    <div class="q"><div class="lb">出生时间 <span style="color:var(--ink3);font-weight:400">（选填）</span></div>
+      <div class="hint">尽量精确到分钟——没有时间就按中午算，上升点和宫位不参与，月亮也可能差一档。</div>
+      <input type="time" id="xp-fTime"></div>
+    <div class="q"><div class="lb">出生城市</div>
+      <div class="hint">城市只用来定经纬度（算上升点用），统一按北京时间 UTC+8 处理。</div>
+      <select id="xp-fCity"></select></div>
+    <div id="xp-fCustom" class="hide">
+      <div class="rgr">
+        <div><label>北纬（度，如 31.3）</label><input type="number" id="xp-fLat" step="0.01" min="-90" max="90"></div>
+        <div><label>东经（度，如 120.6）</label><input type="number" id="xp-fLon" step="0.01" min="-180" max="180"></div>
+      </div>
+    </div>
+    <button class="btn" onclick="XP.saveForm()">保存档案</button>
+  </section>
+
+  <section id="xp-scr-result" class="hide"></section>
+  <section id="xp-scr-spouse" class="hide"></section>
+  <section id="xp-scr-load" class="hide"></section>
+
+</div>
+  </div><!-- /page-xing -->
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ?v= 版本号：CDN（EdgeOne）按路径缓存，不带参数的 URL 会喂旧版；
+     改 engine/questions 的权重或题库时**必须同步 bump 这个数字**。 -->
+<script src="https://cdn.jsdelivr.net/npm/@tencent-ai/workbuddy-cloud-sdk@dev/lib/index.global.js"></script>
+<script src="questions.js?v=25"></script>
+<script src="xingpan_astro.js?v=1"></script>
+<script src="xingpan_juno.js?v=1"></script>
+<script src="app.js?v=25"></script>
+
+<nav class="tabbar" id="tabbar">
+  <div class="tab on" data-tab="yue" onclick="switchTab('yue')">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C7 17.3 3.5 14.4 3.5 11.1 3.5 8.5 5.5 6.5 8 6.5c1.4 0 2.8.8 3.5 2 .7-1.2 2.1-2 3.5-2 2.5 0 4.5 2 4.5 4.5 0 3.3-3.5 6.2-8 9.4z"/></svg>
+    <span>月老</span>
+  </div>
+  <div class="tab" data-tab="xing" onclick="switchTab('xing')">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><ellipse cx="12" cy="13" rx="9" ry="3.4" transform="rotate(-20 12 13)"/><circle cx="19" cy="6.5" r="1.4"/></svg>
+    <span>星盘</span>
+  </div>
+</nav>
+
+<script>
+(function(){
+'use strict';
+'use strict';
+const A = window.XPAstro;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+
+/* ---------- 城市经纬度 ---------- */
+const CITIES = [
+  ['北京',39.90,116.41],['上海',31.23,121.47],['广州',23.13,113.26],['深圳',22.54,114.06],
+  ['杭州',30.27,120.16],['苏州',31.30,120.58],['南京',32.06,118.80],['常州',31.81,119.97],
+  ['无锡',31.49,120.31],['南通',31.98,120.89],['宁波',29.87,121.54],['成都',30.57,104.07],
+  ['重庆',29.56,106.55],['武汉',30.59,114.31],['西安',34.34,108.94],['天津',39.08,117.20],
+  ['长沙',28.23,112.94],['郑州',34.75,113.63],['青岛',36.07,120.38],['沈阳',41.80,123.43],
+  ['大连',38.91,121.61],['厦门',24.48,118.09],['福州',26.07,119.30],['昆明',24.88,102.83],
+  ['贵阳',26.65,106.63],['南宁',22.82,108.37],['海口',20.04,110.32],['兰州',36.06,103.83],
+  ['乌鲁木齐',43.83,87.62],['哈尔滨',45.80,126.53],['长春',43.82,125.32],['太原',37.87,112.55],
+  ['石家庄',38.04,114.51],['合肥',31.82,117.23],['温州',28.00,120.70],['佛山',23.02,113.12],
+  ['东莞',23.02,113.75],['珠海',22.27,113.58],['香港',22.32,114.17],['澳门',22.20,113.55],
+  ['中国台北',25.03,121.57],['其他城市（手填经纬度）',null,null]
+];
+
+/* ---------- 行星释义 ---------- */
+const PLANET = {
+  sun:{n:'太阳',k:'自我核心与生命方向'},
+  moon:{n:'月亮',k:'情绪与安全感'},
+  mercury:{n:'水星',k:'沟通与思维方式'},
+  venus:{n:'金星',k:'审美喜好与爱的表达'},
+  mars:{n:'火星',k:'行动力与吸引力'},
+  jupiter:{n:'木星',k:'乐观与成长空间'},
+  saturn:{n:'土星',k:'责任承诺与考验'},
+  asc:{n:'上升',k:'第一印象与外在气质'},
+  juno:{n:'婚神星',k:'亲密关系里的承诺与需求'}
+};
+const PL_GLYPH = {sun:'☉',moon:'☽',mercury:'☿',venus:'♀',mars:'♂',jupiter:'♃',saturn:'♄',asc:'↑',juno:'⚻'};
+
+/* 经典行星对的相位文案（h=和谐相位 d=困难相位 c=合相） */
+const PAIR_LIB = {
+  'sun|moon':{h:'太阳与月亮的经典婚配相位：一个发光一个接住，天然的「搭伙过日子」结构，相处久了越来越像一家人。',
+    d:'一个想往外闯、一个想宅着取暖，需求总在错拍；但这组张力也是熟悉感的来源，磨合好了反而互补。',
+    c:'性格与情绪深度绑定，第一眼就像认识了很久，黏度高，情绪也容易互相共振。'},
+  'venus|mars':{h:'金星火星的经典来电配置：TA 喜欢的样子刚好是你想给的方向，吸引力直接又自然。',
+    d:'欲望与喜好错位：来电感很强但节奏对不上，谁主动谁被动容易扯皮，需要把期待说破。',
+    c:'强吸引组合，见面就有火花，热得快；记得给彼此留一点降温的空间。'},
+  'moon|venus':{h:'情绪与温柔互相供给，相处舒服，吵架也快和好，是很养人的组合。',
+    d:'表达关心的方式不一样：一个觉得「你不懂我」，一个觉得「我明明付出了」，需求要说出口。',
+    c:'天然亲密感，在一起很放松，撒娇和接住撒娇都在线。'},
+  'sun|venus':{h:'审美和欣赏在线：TA 的样子和气质刚好长在你的点上，越看越顺眼。',
+    d:'喜欢的方式有落差：一个觉得用力，一个觉得敷衍；把「我喜欢什么」讲清楚就好。',
+    c:'互相欣赏，相处的氛围轻松愉快，是很好的开局配置。'},
+  'moon|mars':{h:'行动力刚好安抚情绪：TA 一做你就安心，配合默契。',
+    d:'情绪上头时对方的热反应容易火上浇油，吵架升级快，得配一套冷静机制。',
+    c:'情绪与行动直接挂钩，感情浓烈，但脾气也来得直接。'},
+  'sun|sun':{h:'太阳同星座：底色相似，价值观和节奏天然接近，像照镜子一样好懂。',
+    d:'太阳同星座也容易互相较劲：太像的人会抢同一个位置，分工要提前谈。',
+    c:'太阳同座：相似度高，默契省事，但平淡期要一起找新鲜感。'},
+  'moon|moon':{h:'情绪节奏同频，状态好坏都能互相接住，安全感双倍。',
+    d:'低谷期容易一起 emo，两个人同时 down 的时候没人掌舵。',
+    c:'月亮同座：情绪开关一样，饿点和累点都差不多。'},
+  'mercury|mercury':{h:'沟通频率接近，说话不用翻译，聊天能一直聊下去。',
+    d:'思路一个直一个绕，讨论容易变成辩论；重要决定各让一步。',
+    c:'说话方式像复制粘贴，省心，但也容易信息茧房。'},
+  'venus|venus':{h:'审美消费观接近，约会喜好一致，吃饭拍照旅行都合拍。',
+    d:'喜欢的东西对不上：一个觉得品味绝，一个觉得就那样；互相体验对方的爱好反而有趣。',
+    c:'审美同源，逛同一家店会看上同一件东西。'},
+  'mars|mars':{h:'行动节奏一致，说走就走，做事一起上。',
+    d:'节奏互相抢拍：一个急一个犟，合作时得分好主次。',
+    c:'行动力同款，一起干活效率高，一起上头也是真上头。'},
+  'sun|saturn':{h:'土星带来认真和承诺感：这段关系会让 TA 变得更有责任感。',
+    d:'责任与压力并重：容易有一方总在「管」另一方，宽松感要刻意留。',
+    c:'关系自带一份认真，进展慢但每一步都算数。'},
+  'moon|saturn':{h:'土星给情绪上了保险：安定、长期、说到做到。',
+    d:'情绪表达容易被「讲道理」压回去，委屈攒多了会爆发；多抱抱、少说教。',
+    c:'情绪上互相托底，稳定但别把关心过成查岗。'},
+  'venus|saturn':{h:'爱得慢但稳，越处越深，经得起时间。',
+    d:'浪漫被现实考量稀释，仪式感不足是主要扣分项。',
+    c:'感情走细水长流路线，浪漫不挂在嘴上在账上。'},
+  'sun|jupiter':{h:'木星放大阳光面：在一起运气和眼界都会变好，互相成就。',
+    d:'过度乐观，容易一起画大饼；落地执行要有人盯着。',
+    c:'在一起自带喜感和松弛，什么都想试。'},
+  'venus|jupiter':{h:'慷慨与浪漫加成，相处大气不抠门，快乐加倍。',
+    d:'花钱和享受容易超预算：快乐是真快乐，账单也是真账单。',
+    c:'氛围担当组合，约会永远不缺节目。'},
+  'moon|mercury':{h:'能聊到心坎里：TA 说话的方式刚好让你安心。',
+    d:'关心的话容易说成分析报告——情绪要的是回应，不是解决方案。',
+    c:'聊天即治愈，睡前电话能打两小时。'},
+  'sun|mercury':{h:'三观聊得通：TA 的表达总能跟上你的想法。',
+    d:'一个说得多一个嫌啰嗦，观点交锋时注意就事论事。',
+    c:'想法同频，讨论问题像自己跟自己开会。'},
+  'sun|mars':{h:'你的方向刚好有 TA 的行动力托着，推着彼此往前走。',
+    d:'节奏互相点火：一个催一个顶，容易从商量变成较劲。',
+    c:'干劲互相点燃，是搭伙做事的好组合。'},
+  'sun|asc':{h:'外在气质对上自我审美：第一眼就有好感的配置。',
+    d:'第一印象与内在预期有落差，相处后需要重新认识彼此。',
+    c:'气场同频，站在一起像「看起来就很配」。'},
+  'venus|asc':{h:'TA 的长相气质刚好是你的审美点，视觉效果满分。',
+    d:'审美好感被相处细节消耗，需要经营新鲜感。',
+    c:'带得出去也看得顺眼，颜值互相认证。'},
+  'mars|asc':{h:'气场互相点燃，见面就有火花。',
+    d:'太容易一点就着，见面三分钟就能吵起来又三分钟和好。',
+    c:'存在感互相放大，在一起气场两米八。'},
+  'moon|asc':{h:'TA 的气质让你天然放松，情绪有落脚点。',
+    d:'情绪表达在外人面前容易放不开，熟了才显真。',
+    c:'第一印象就带亲和力，相处门槛低。'},
+  'jupiter|saturn':{h:'一个踩油门一个系安全带，平衡好了是黄金搭档。',
+    d:'乐观与保守互相拉扯：一个嫌怂一个嫌飘。',
+    c:'节奏互补，扩张和守成都有人管。'}
+};
+
+/* ---------- 存储 ---------- */
+const LS_KEY = 'xingpan_demo_v1';
+let S = { me: null, ot: null };
+try { S = Object.assign(S, JSON.parse(localStorage.getItem(LS_KEY) || '{}')); } catch {}
+function persist(){ try { localStorage.setItem(LS_KEY, JSON.stringify(S)); } catch {} }
+
+/* ---------- 页面切换 ---------- */
+/* 顶部条：二级页显示（返回键 + 页面名），首页隐藏 */
+function updateSubbar(screen, title){
+  const bar = document.getElementById('subbar'), wrap = document.querySelector('.wrap');
+  if (!bar) return;
+  const sub = !!screen && screen !== 'home' && screen !== 'load';
+  bar.classList.toggle('hide', !sub);
+  if (wrap) wrap.classList.toggle('sub', sub);
+  const t = document.getElementById('subTitle');
+  if (t) t.textContent = sub ? (title || '') : '';
+}
+function goHome(){ show('home'); }
+
+const XP_TITLES = { home:'', form:'填写出生信息', result:'合盘分析', spouse:'完美配偶形象', load:'' };
+let xpScreen = 'home';
+function show(name){
+  xpScreen = name;
+  for (const s of ['home','form','result','spouse','load']) $('xp-scr-'+s).classList.toggle('hide', s!==name);
+  const head = $('xp-spHead');
+  if (head) head.classList.toggle('hide', name !== 'home');   /* 二级页不显示 logo 头 */
+  updateSubbar(name, XP_TITLES[name] || '');
+  window.scrollTo(0,0);
+}
+let toastTimer = null;
+function toast(msg){
+  const t = $('toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('on'), 2200);
+}
+
+/* ---------- 表单 ---------- */
+let editing = null;
+function initCity(){
+  const sel = $('xp-fCity');
+  sel.innerHTML = CITIES.map((c,i)=>`<option value="${i}">${c[0]}</option>`).join('');
+  sel.onchange = ()=> $('xp-fCustom').classList.toggle('hide', CITIES[sel.value][1] !== null);
+}
+function openForm(who){
+  editing = who;
+  $('xp-formTitle').textContent = who==='me' ? '填写我的出生信息' : '填写对方的出生信息';
+  const p = S[who] || {};
+  $('xp-fName').value = p.name || '';
+  $('xp-fDate').value = p.date || '';
+  $('xp-fTime').value = p.time || '';
+  const ci = p.cityIdx !== undefined ? p.cityIdx : 0;
+  $('xp-fCity').value = ci;
+  $('xp-fCustom').classList.toggle('hide', CITIES[ci][1] !== null);
+  $('xp-fLat').value = p.lat ?? '';
+  $('xp-fLon').value = p.lon ?? '';
+  show('form');
+}
+function saveForm(){
+  const name = $('xp-fName').value.trim();
+  const date = $('xp-fDate').value;
+  if (!name) return toast('先填个称呼');
+  if (!date) return toast('出生日期必填');
+  const ci = +$('xp-fCity').value;
+  let lat = CITIES[ci][1], lon = CITIES[ci][2], city = CITIES[ci][0];
+  if (lat === null){
+    lat = parseFloat($('xp-fLat').value); lon = parseFloat($('xp-fLon').value);
+    city = '自定义位置';
+    if (isNaN(lat) || isNaN(lon)) return toast('手填模式要填经纬度');
+  }
+  S[editing] = { name, date, time: $('xp-fTime').value, cityIdx: ci, city, lat, lon };
+  persist(); renderHome(); show('home'); toast('已保存（只存在本机）');
+}
+function fillSample(){
+  S.me  = { name:'小橘', date:'1995-06-15', time:'14:30', cityIdx:5, city:'苏州', lat:31.30, lon:120.58 };
+  S.ot  = { name:'阿澄', date:'1993-11-08', time:'09:45', cityIdx:1, city:'上海', lat:31.23, lon:121.47 };
+  persist(); renderHome(); toast('已填入示例，可直接开始合盘');
+}
+function parseProfile(p){
+  const [y,mo,d] = p.date.split('-').map(Number);
+  let hh = null, mm = 0;
+  if (p.time){ const t = p.time.split(':'); hh = +t[0]; mm = +(t[1]||0); }
+  return { y, mo, d, hh, mm, lat: p.lat, lon: p.lon, name: p.name };
+}
+
+/* ---------- 渲染首页 ---------- */
+function brief(p){
+  if (!p) return '出生日期 + 时间 + 城市';
+  const [y,mo,d] = p.date.split('-');
+  return `${y}-${mo}-${d}${p.time ? ' '+p.time : ''} · ${p.city}`;
+}
+function renderHome(){
+  $('xp-meName').textContent = S.me ? S.me.name : '未填写';
+  $('xp-meSm').textContent = brief(S.me);
+  $('xp-otName').textContent = S.ot ? S.ot.name : '未填写';
+  $('xp-otSm').textContent = brief(S.ot);
+  $('xp-runBtn').disabled = !(S.me && S.ot);
+  const go = $('xp-spouseGo');
+  if (!S.me){ go.textContent = '去算 ›'; go.classList.remove('mute'); return; }
+  go.textContent = '用我的档案 ›';
+}
+
+/* ---------- 评分 ---------- */
+const wA = { conj:9, trine:8, sextile:5, square:6, opp:4 };        // 吸引力（刑也算张力吸引）
+const wC = { conj:7, trine:7, sextile:4, square:-5, opp:-4 };      // 沟通
+const wE = { conj:6, trine:7, sextile:4, square:-5, opp:-3 };      // 情感默契
+const wL = { conj:5, trine:6, sextile:3, square:-6, opp:-5 };      // 长期相处
+const wG = { conj:2.5, trine:3, sextile:1.5, square:-2, opp:-1.5 };// 总分
+const involves = (as, keys) => keys.includes(as.a) || keys.includes(as.b);
+const isHard = a => a.asp === 'square' || a.asp === 'opp';
+
+function score(aChart, bChart, aspects){
+  const D = { attr: 50, comm: 50, emo: 50, long: 50 };
+  let raw = 0;
+  const sa = aChart.planets.sun, sb = bChart.planets.sun;
+  // 日座元素关系微调总分
+  if (sa.signIdx % 4 === sb.signIdx % 4) raw += 2;
+  else if ((sa.element==='fire'&&sb.element==='air')||(sa.element==='air'&&sb.element==='fire')||
+           (sa.element==='earth'&&sb.element==='water')||(sa.element==='water'&&sb.element==='earth')) raw += 1;
+  for (const as of aspects){
+    raw += wG[as.asp] * ((as.a==='saturn'||as.b==='saturn') && as.asp==='conj' ? -0.6 : 1);
+    if (involves(as, ['venus','mars']) || (involves(as,['asc']) && involves(as,['sun','moon','venus','mars'])))
+      D.attr += wA[as.asp];
+    if (involves(as, ['mercury'])) D.comm += wC[as.asp];
+    if (involves(as, ['moon','venus'])) D.emo += wE[as.asp];
+    if (involves(as, ['saturn','jupiter','sun'])) D.long += wL[as.asp];
+  }
+  for (const k of Object.keys(D)) D[k] = Math.round(clamp(D[k], 8, 97));
+  const score = Math.round(clamp(52 + raw * 2.0, 8, 96));
+  return { score, dims: D };
+}
+function verdict(s){
+  if (s >= 78) return ['盘面很合','关键相位以和谐为主，相处顺手的配置不少。'];
+  if (s >= 66) return ['合拍偏高','好的连接扎实，少数张力点可以靠沟通化开。'];
+  if (s >= 52) return ['有来有往','既有合拍也有错拍，关系质量更多取决于经营。'];
+  if (s >= 38) return ['需要磨合','张力相位偏多，容易互相较劲，但张力也是吸引力的一种。'];
+  return ['盘面张力大','困难相位密集，相处耗能高，适合当作了解彼此差异的地图。'];
+}
+
+/* ---------- 释义 ---------- */
+function pairText(as){
+  const key = [as.a, as.b].sort().join('|');
+  const lib = PAIR_LIB[key];
+  const A_ = PLANET[as.a], B_ = PLANET[as.b];
+  if (lib) return as.asp==='conj' ? (lib.c||lib.h) : (isHard(as) ? lib.d : lib.h);
+  return `${A_.n}（管${A_.k}）与对方 ${B_.n}（管${B_.k}）${as.aspName}：` +
+    ({conj:'两股能量融合在一起，感受直接。',trine:'配合顺畅，不用刻意迁就。',
+      sextile:'有好感基础，主动一点就能点亮。',square:'节奏容易打架，需要磨合。',
+      opp:'互补又互拉，处好了是绝配。'}[as.asp]);
+}
+function aspColor(as){
+  if (as.asp==='trine'||as.asp==='sextile') return 's-harmony';
+  if (isHard(as)) return 's-conflict';
+  return 's-mix';
+}
+
+/* ---------- 星盘轮盘 SVG（符号带 data-tip：悬停/触摸显示名称与标注） ---------- */
+const SIGN_TIP = [
+  '白羊 · 火象 · 开创：主动、直接、先做再说','金牛 · 土象 · 固定：稳定、务实、慢热',
+  '双子 · 风象 · 变动：好奇、善聊、信息快','巨蟹 · 水象 · 开创：顾家、敏感、重安全感',
+  '狮子 · 火象 · 固定：大方、要面子、爱表现','处女 · 土象 · 变动：细致、挑剔、讲逻辑',
+  '天秤 · 风象 · 开创：审美、好相处、怕冲突','天蝎 · 水象 · 固定：深情、专一、占有欲',
+  '射手 · 火象 · 变动：爱自由、格局大、行动力','摩羯 · 土象 · 开创：稳重、事业心、责任感',
+  '水瓶 · 风象 · 固定：独立、清奇、要空间','双鱼 · 水象 · 变动：浪漫、共情、氛围感'
+];
+const HOUSE_TIP = [
+  '第 1 宫：自我、外表与给人的第一印象','第 2 宫：金钱、资源与自我价值',
+  '第 3 宫：沟通、学习与日常往来','第 4 宫：家庭、原生与安全感的根',
+  '第 5 宫：恋爱、玩乐与创造力','第 6 宫：工作、健康与日常秩序',
+  '第 7 宫：伴侣、合作与一对一关系','第 8 宫：深层共享、信任与危机',
+  '第 9 宫：远行、深造与格局','第 10 宫：事业、名声与社会位置',
+  '第 11 宫：社群、朋友与理想','第 12 宫：隐秘、独处与潜意识'
+];
+function wheelSVG(aChart, bChart, aspects){
+  const C = 170, R_OUT = 160, R_TICK = 148, R_SIGN = 136, R_HOUSE = 116, R_A = 100, R_B = 78;
+  const pt = (r, lon) => {
+    const ang = (180 - lon) * Math.PI / 180;
+    return [C + r * Math.cos(ang), C - r * Math.sin(ang)];
+  };
+  const tip = t => String(t).replace(/"/g, '&quot;');
+  let s = `<svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">`;
+  s += `<circle cx="${C}" cy="${C}" r="${R_OUT}" fill="#fff" stroke="var(--line)"/>`;
+  s += `<circle cx="${C}" cy="${C}" r="${R_TICK}" fill="none" stroke="var(--line)" stroke-width=".6"/>`;
+  s += `<circle cx="${C}" cy="${C}" r="${R_SIGN - 4}" fill="none" stroke="#eef1f5"/>`;
+  // 星座刻度与符号
+  for (let i = 0; i < 12; i++){
+    const [x1,y1] = pt(R_TICK, i*30), [x2,y2] = pt(R_OUT, i*30);
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="var(--line)"/>`;
+    const [gx,gy] = pt((R_TICK+R_SIGN)/2, i*30+15);
+    const el = ['fire','earth','air','water'][i%4];
+    const col = {fire:'#dc2626',earth:'#7c6f4f',air:'#ca8a04',water:'#2563eb'}[el];
+    s += `<text x="${gx}" y="${gy+4}" text-anchor="middle" font-size="11" fill="${col}"
+      data-tip="${tip(SIGN_TIP[i])}">${A.SIGN_GLYPH[i]}</text>`;
+    /* 透明热区：符号太小，手指点不准 */
+    s += `<circle cx="${gx}" cy="${gy}" r="13" fill="transparent" data-tip="${tip(SIGN_TIP[i])}"/>`;
+  }
+  // 整宫制宫位数字（1 宫 = 上升所在星座）
+  if (aChart.hasTime && aChart.planets.asc){
+    const ascSign = aChart.planets.asc.signIdx;
+    for (let h = 0; h < 12; h++){
+      const signIdx = (ascSign + h) % 12;
+      const [hx,hy] = pt(R_HOUSE, signIdx*30 + 15);
+      s += `<text x="${hx}" y="${hy+3.5}" text-anchor="middle" font-size="9" fill="var(--ink3)"
+        data-tip="${tip(HOUSE_TIP[h])}">${h+1}</text>`;
+      s += `<circle cx="${hx}" cy="${hy}" r="11" fill="transparent" data-tip="${tip(HOUSE_TIP[h])}"/>`;
+    }
+  }
+  // 相位连线（A 行星 ↔ B 行星）
+  for (const as of aspects){
+    const pa = aChart.planets[as.a], pb = bChart.planets[as.b];
+    const [x1,y1] = pt(R_A, pa.lon), [x2,y2] = pt(R_B, pb.lon);
+    const col = as.asp==='trine'||as.asp==='sextile' ? '#16a34a' : isHard(as) ? '#dc2626' : '#f97316';
+    const op = isHard(as) ? .55 : .5;
+    const t = tip(`${as.sym} ${as.aspName} · ${esc(aChart.name)} ${PLANET[as.a].n} × ${esc(bChart.name)} ${PLANET[as.b].n} · 容许度 ${as.orb}°` +
+      `｜${as.asp==='trine'||as.asp==='sextile' ? '和谐相位：配合顺畅' : isHard(as) ? '困难相位：有张力，要磨合' : '合相：能量融合，感受直接'}`);
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="1.1" opacity="${op}"/>`;
+    /* 透明加粗线：给相位一个够宽的热区 */
+    s += `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="transparent" stroke-width="9" data-tip="${t}"/>`;
+  }
+  // A / B 行星点
+  const dot = (ch, r, fill, tag, who) => {
+    for (const k of Object.keys(ch.planets)){
+      const p = ch.planets[k];
+      const [x,y] = pt(r, p.lon);
+      const t = tip(`${PL_GLYPH[k]} ${PLANET[k].n}（${PLANET[k].k}）· ${p.glyph} ${p.sign} ${p.degInSign}°` +
+        `${p.house ? ' · 第' + p.house + '宫' : ''} · ${esc(ch.name)}`);
+      s += `<circle cx="${x}" cy="${y}" r="8.5" fill="${fill}" stroke="#fff" stroke-width="1.2" data-tip="${t}"/>`;
+      s += `<text x="${x}" y="${y+3.4}" text-anchor="middle" font-size="9" fill="#fff" pointer-events="none">${PL_GLYPH[k]}</text>`;
+      s += `<text x="${x}" y="${y - (tag==='a'?13:-15)}" text-anchor="middle" font-size="7.5" fill="var(--ink3)" pointer-events="none">${ch.name}</text>`;
+      s += `<circle cx="${x}" cy="${y}" r="14" fill="transparent" data-tip="${t}"/>`;
+    }
+  };
+  dot(aChart, R_A, '#f97316', 'a');
+  dot(bChart, R_B, '#2563eb', 'b');
+  s += `<text x="${C}" y="${C-4}" text-anchor="middle" font-size="10" fill="var(--ink3)">外圈 ${esc(aChart.name||'A')}</text>`;
+  s += `<text x="${C}" y="${C+9}" text-anchor="middle" font-size="10" fill="var(--ink3)">内圈 ${esc(bChart.name||'B')}</text>`;
+  return s + '</svg>';
+}
+
+/* ---------- 星图符号提示（鼠标悬停 / 手指触摸） ---------- */
+(function initXTip(){
+  const box = document.createElement('div');
+  box.className = 'xtip';
+  document.body.appendChild(box);
+  let hideTimer = null;
+  const target = el => (el && el.closest) ? el.closest('[data-tip]') : null;
+  function place(el){
+    const t = el.getAttribute('data-tip');
+    if (!t) return false;
+    box.textContent = t; box.classList.add('on');
+    const r = el.getBoundingClientRect(), w = box.offsetWidth, h = box.offsetHeight;
+    let left = r.left + r.width/2 - w/2;
+    left = Math.max(8, Math.min(left, window.innerWidth - w - 8));
+    let top = r.top - h - 10;
+    if (top < 8) top = r.bottom + 10;
+    box.style.left = left + 'px'; box.style.top = top + 'px';
+    return true;
+  }
+  function hide(){ box.classList.remove('on'); }
+  document.addEventListener('mouseover', e => { const el = target(e.target); if (el) place(el); });
+  document.addEventListener('mouseout', e => { if (target(e.target)) hide(); });
+  document.addEventListener('touchstart', e => {
+    const el = target(e.target);
+    clearTimeout(hideTimer);
+    if (el) place(el); else hide();
+  }, { passive: true });
+  document.addEventListener('touchend', () => {
+    clearTimeout(hideTimer); hideTimer = setTimeout(hide, 2200);   // 抬手后停留一会儿再消失
+  }, { passive: true });
+  document.addEventListener('touchmove', hide, { passive: true });
+  window.addEventListener('scroll', hide, { passive: true });
+})();
+
+/* ---------- 手势 / 缩放锁定（不影响滚动与点击） ---------- */
+(function lockZoom(){
+  const stop = e => { e.preventDefault(); };
+  for (const ev of ['gesturestart','gesturechange','gestureend']) document.addEventListener(ev, stop, { passive:false });
+  document.addEventListener('touchmove', e => { if (e.touches && e.touches.length > 1) e.preventDefault(); }, { passive:false });
+  document.addEventListener('dblclick', stop, { passive:false });
+  document.addEventListener('contextmenu', e => { if (target(e.target)) e.preventDefault(); }, { passive:false });
+  function target(el){ return (el && el.closest) ? el.closest('.wheelbox, .tabbar') : null; }
+})();
+
+/* ---------- 结果页 ---------- */
+function placementsHTML(chart){
+  let rows = A.PLANET_KEYS.concat(chart.hasTime ? ['asc'] : []).map(k => {
+    const p = chart.planets[k];
+    if (!p) return '';
+    const h = p.house ? ` · 第${p.house}宫` : '';
+    return `<div class="kv"><span>${PL_GLYPH[k]} ${PLANET[k].n}</span><b>${p.glyph} ${p.sign} ${p.degInSign}°${h}</b></div>`;
+  }).join('');
+  if (window.XPJuno){
+    const j = XPJuno.lon(chart.JD);
+    if (j.range === 0){
+      const h = chart.hasTime && chart.planets.asc ? ((j.signIdx - chart.planets.asc.signIdx) + 12) % 12 + 1 : null;
+      rows += `<div class="kv"><span>⚻ 婚神星</span><b>${j.glyph} ${j.sign} ${j.degInSign}°${h ? ` · 第${h}宫` : ''}</b></div>`;
+    }
+  }
+  return `<div class="pi"><div class="pk">${esc(chart.name)} · ${chart.hasTime?'含上升与宫位':'无出生时间，不含宫位'}</div>${rows}</div>`;
+}
+function run(){
+  if (!S.me || !S.ot) return;
+  let aChart, bChart, aspects, sc;
+  try {
+    aChart = A.calcChart(parseProfile(S.me));
+    bChart = A.calcChart(parseProfile(S.ot));
+    aspects = A.findAspects(aChart, bChart);
+    sc = score(aChart, bChart, aspects);
+  } catch(e){ console.error(e); return toast('计算出错：' + e.message); }
+  const [vt, vs] = verdict(sc.score);
+  const noTime = !(aChart.hasTime && bChart.hasTime);
+  aspects.sort((x,y)=>Math.abs(x.orb)-Math.abs(y.orb));
+  const highlights = aspects.slice(0, 4);
+
+  const dims = [['吸引力','attr','金星·火星·上升的交叉相位'],['沟通','comm','水星相关相位'],['情感默契','emo','月亮·金星相关相位'],['长期相处','long','土星·木星·太阳相关相位']]
+    .map(([n,k,note]) => `<div class="brow"><div class="bk"><b>${n}</b><em>${sc.dims[k]} · ${note}</em></div>
+      <div class="bar"><i style="width:${sc.dims[k]}%"></i></div></div>`).join('');
+
+  const aspRows = aspects.map(as => `<div class="asprow">
+    <div class="sym ${aspColor(as)}">${as.sym}</div>
+    <div class="txt"><span class="who">${esc(aChart.name)} ${PL_GLYPH[as.a]}${PLANET[as.a].n}</span>
+    × <span class="who">${esc(bChart.name)} ${PL_GLYPH[as.b]}${PLANET[as.b].n}</span>
+    <span class="mono">（${as.aspName} · 容许度 ${as.orb}°）</span><br>${pairText(as)}</div></div>`).join('')
+    || '<div class="oneline">双方行星之间没有落进容许度的显著相位——盘面安静，相处更看现实条件。</div>';
+
+  const tips = highlights.length ? `<div class="sec">最值得注意的几个连接</div><div class="card">` +
+    highlights.map(as => `<div class="tip"><div class="ic ${aspColor(as)==='s-harmony'?'ic-good':aspColor(as)==='s-conflict'?'ic-hard':'ic-note'}">${as.sym}</div>
+      <div><b>${PLANET[as.a].n} × ${PLANET[as.b].n} ${as.aspName}</b>（容许度 ${as.orb}°）<br>${pairText(as)}</div></div>`).join('') + '</div>' : '';
+
+  $('xp-scr-result').innerHTML = `
+    <div class="card big">
+      <div class="n">${sc.score}<small> / 100</small></div>
+      <div class="v">${vt} · ${esc(aChart.name)} × ${esc(bChart.name)}</div>
+      <div class="s">${vs}</div>
+    </div>
+    <div class="sec">四个维度</div>
+    <div class="card">${dims}</div>
+    <div class="sec">合盘星图</div>
+    <div class="card wheelbox">${wheelSVG(aChart, bChart, aspects)}</div>
+    ${tips}
+    <div class="sec">双方落座</div>
+    <div class="pair">${placementsHTML(aChart)}${placementsHTML(bChart)}</div>
+    ${noTime ? '<div class="card" style="border:1px dashed #fde3c8;background:#fffaf5"><div class="oneline">⚠️ 有一方没填出生时间：宫位与上升未参与，月亮落座在临界日可能差一档。补上时间结果会更细。</div></div>' : ''}
+    <div class="sec">全部交叉相位（按容许度排序）</div>
+    <div class="card">${aspRows}</div>
+    ${aChart.timeNote || bChart.timeNote ? `<div class="mono" style="margin-top:10px">${esc(aChart.timeNote || '')} ${esc(bChart.timeNote || '')}</div>` : ''}
+    <div class="foot">你的档案只保存在这台设备上，不会被上传。<br>占星描述为框架化解读，不能替代真实的相处与了解。
+      <div class="rights">all rights reserved by 小红书 Ice icy</div></div>`;
+  show('result');
+}
+
+/* ---------- 完美配偶形象（七宫头看外貌 · 婚神星看性格） ---------- */
+const DSC_LIB = {
+  '白羊':'气质利落，行动多于言语，眉眼带英气。常见爱运动或坐不住的样子，走路快、说话直，第一印象是「这人很有劲」。','金牛':'五官端正耐看，属于越看越顺眼那一挂。气质沉稳，脖子线条和嗓音常有存在感，审美偏经典路线。','双子':'显年轻，有灵气。身材偏瘦长、表情丰富，眼神里总在找新鲜事，看着比实际年龄小几岁。','巨蟹':'轮廓柔和，笑容亲切，自带居家感和安全感。情绪都写在脸上，给人的第一感觉是「好接近」。','狮子':'存在感强，气场足。发量或发型常是标志，衣着大胆醒目，往人群里一站就会被注意到。','处女':'干净、清爽、细节到位，看起来很自律。衣着简单但规整，整体是一种「讲卫生有分寸」的体面感。','天秤':'打扮有品位、注重细节，耐看，显年轻。对颜色和款式有自己的感觉，气质温和，属于人群中让人觉得舒服的那类。','天蝎':'眼神深邃，有神秘感。不一定爱说话，但目光很有内容，整体气质偏性感、有张力。','射手':'阳光、爱笑、元气感足。比例上常见大长腿或个子高挑，穿着随意但不显邋遢，像随时准备出门玩。','摩羯':'骨相清晰，气质偏成熟稳重，年轻时显老成、年纪上来反而抗老。气场冷静，第一印象是「靠谱」。','水瓶':'有辨识度，风格独特，气质偏清冷。不太走大众路线，穿搭或想法里总有点别人没有的东西。','双鱼':'柔和、梦幻，眼神温柔，自带氛围感。笑起来让人放下防备，整体像从故事里走出来的人。'
+};
+const JUNO_LIB = {
+  '白羊':{x:'直来直去、有冲劲，脾气来得快去得快。认定一个人时会非常主动，受不了暧昧拉扯。',j:'靠近得又快又直接，行动先于语言——TA 觉得合适就会先出现、先做事，感情是「追」出来的。'},
+  '金牛':{x:'性格稳、务实、慢热、重承诺。不太说漂亮话，但答应的事基本都做得到，对吃和生活品质有要求。',j:'靠近方式是日久生情：从一起吃饭、一起过日子般的日常里慢慢靠近，感情像煲汤，越久越浓。'},
+  '双子':{x:'活泼话多、好奇心重、脑子转得快。聊天永远有话题，但情绪来得快散得也快，需要新鲜感续命。',j:'感情是「聊」出来的：先从频繁交流开始，先成朋友后成恋人，能聊到一起是 TA 的硬门槛。'},
+  '巨蟹':{x:'温柔顾家、情绪敏感、共情力强。对家人和朋友上心，但壳子也厚，受了委屈不容易说出口。',j:'靠近方式从「照顾」开始：会记得你爱吃的东西、提醒你添衣服，感情是在被照顾的感觉里长出来的。'},
+  '狮子':{x:'大方、要面子、有光。对喜欢的人出手大方也护得彻底，但需要被看见、被夸，冷落久了会蔫。',j:'靠近得高调而热烈：来得轰轰烈烈，喜欢公开的偏爱和仪式感，TA 的喜欢藏不住。'},
+  '处女':{x:'细致、讲逻辑、有点挑剔。观察力强，嘴上可能念叨但手上都在帮你解决问题，感情表达藏在细节里。',j:'靠近方式是「帮你做事」：从纠正你的生活细节、替你操心开始，细水长流，越处越离不开。'},
+  '天秤':{x:'有品位、好相处、怕冲突。人缘好、情商在线，但做决定容易犹豫，需要有人帮 TA 拿主意。',j:'靠近从审美和氛围开始：可能在共同的社交场合或审美趣味里产生好感，气氛到位了才推进。'},
+  '天蝎':{x:'深情专一、占有欲强、慢热。不太轻易交底，但认定之后浓度极高，也容易吃醋和试探。',j:'来得深、试探多：会先远远观察、反复确认安全感，一旦决定靠近就是全力以赴。'},
+  '射手':{x:'闲不住、喜欢到处跑、格局大、行动力强。乐天派，讨厌被束缚，对世界永远有兴趣。',j:'靠近方式来得突然：可能出现在一次旅行、一次说走就走的局里，热得快，相处里也要保留自由空间。'},
+  '摩羯':{x:'成熟稳重、事业心强、嘴硬心软。不太说情话，但会把你放进 TA 的长期计划里，责任感是刻在骨子里的。',j:'慢热、以结婚为目的：靠近得慢、观察得久，但每一步都是奔着「过日子」去的。'},
+  '水瓶':{x:'独立、思路清奇、需要空间。有自己的世界和节奏，讨厌被管，爱讲道理但脑回路常常意外。',j:'靠近方式像朋友：先平等地玩到一起，节奏跳脱、忽冷忽热，你越给空间 TA 越贴过来。'},
+  '双鱼':{x:'温柔浪漫、共情力强、有点迷糊。情绪丰富，容易被氛围打动，恋爱里舍得付出，也需要被接住。',j:'靠近从心动氛围开始：TA 会在你的情绪低落时出现，感情是在浪漫和被需要的感觉里生根的。'}
+};
+function runSpouse(){
+  if (!window.XPJuno) return toast('婚神星模块未加载');
+  if (!S.me){
+    toast('先填写我的出生信息');
+    openForm('me');
+    return;
+  }
+  const p = parseProfile(S.me);
+  const chart = A.calcChart(p);
+  const jd = chart.JD;
+  const juno = XPJuno.lon(jd);
+  let html = `<div class="sec">${esc(S.me.name)} 的完美配偶形象</div>`;
+  html += `<div class="card"><div class="oneline">基于「七宫头看正缘外貌、婚神星看性格与靠近方式」的占星框架，本地实时计算。</div></div>`;
+  // 七宫头（下降点 = 上升点对宫）
+  html += `<div class="sec">七宫头 · TA 的样子</div>`;
+  if (!chart.hasTime){
+    html += `<div class="card"><div class="oneline">⚠️ 没填出生时间，上升点算不出来，七宫头外貌没法算——<b>出生时间对这部分是必填的</b>，最好精确到分钟。性格部分不受影响，往下看。</div></div>`;
+  } else {
+    const dsc = (chart.asc + 180) % 360;
+    const dsi = A.signOf(dsc);
+    const dscSign = A.SIGNS[dsi], dscGlyph = A.SIGN_GLYPH[dsi];
+    const dscDeg = Math.round((dsc - dsi*30) * 10) / 10;
+    html += `<div class="card">
+      <div class="pair" style="margin-bottom:10px">
+        <div class="pi"><div class="pk">上升点（你的外在）</div><div class="pv">${A.SIGN_GLYPH[chart.planets.asc.signIdx]} ${chart.planets.asc.sign} ${chart.planets.asc.degInSign}°</div></div>
+        <div class="pi"><div class="pk">下降点 · 七宫头</div><div class="pv">${dscGlyph} ${dscSign} ${dscDeg}°</div></div>
+      </div>
+      <div class="blk"><div class="tt">${dscGlyph} 七宫头落在 ${dscSign}</div><div class="dd">${DSC_LIB[dscSign]}</div></div>
+      <div class="oneline">传统上，七宫头是你的「下降点」——你对外展露的是上升的那一面，容易吸引互补的另一半。</div>
+    </div>`;
+  }
+  // 婚神星
+  html += `<div class="sec">婚神星 · TA 的性格与靠近方式</div>`;
+  if (juno.range !== 0){
+    html += `<div class="card"><div class="oneline">${esc(juno.note || '婚神星未能计算。')}</div></div>`;
+  } else {
+    const lib = JUNO_LIB[juno.sign];
+    const hNote = chart.hasTime ? (() => {
+      const h = ((juno.signIdx - chart.planets.asc.signIdx) + 12) % 12 + 1;
+      return ` · 第${h}宫`;
+    })() : '';
+    html += `<div class="card">
+      <div class="pi" style="margin-bottom:10px"><div class="pk">婚神星 Juno（出生当日位置）</div>
+      <div class="pv">⚻ ${juno.glyph} ${juno.sign} ${juno.degInSign}°${hNote}</div></div>
+      <div class="blk"><div class="tt">性格：婚神星${juno.sign}</div><div class="dd">${lib.x}</div></div>
+      <div class="blk"><div class="tt">靠近方式：TA 会怎么走近你</div><div class="dd">${lib.j}</div></div>
+    </div>`;
+  }
+  html += `<div class="card" style="border:1px dashed #fde3c8;background:#fffaf5">
+    <div class="oneline">说明：婚神星是 3 号小行星，位置由内置星历表（1940-2050）插值计算；七宫头依赖出生时间与城市经纬度。</div></div>
+`;
+  $('xp-scr-spouse').innerHTML = html;
+  show('spouse');
+}
+
+/* ---------- 加载态（点击后先展示约 5 秒，再进原流程） ---------- */
+const LOAD_MS = 5000;
+let loadTimer = null;
+function showLoad(title, hint){
+  $('xp-scr-load').innerHTML = `
+    <div class="sec">${esc(title)}</div>
+    <div class="card loadbox">
+      <span class="spin"></span>
+      <div class="lt">${esc(hint)}</div>
+      <div class="lh">正在本机完成，不上传任何数据</div>
+      <div class="bar"><i></i></div>
+    </div>`;
+  show('load');
+}
+/* 原地加载：不跳第二个界面，就在用户点的那个入口上转圈（与月老合盘一致） */
+function busyOn(id, text){
+  const el = $(id);
+  if (!el || el.dataset.busy === '1') return null;
+  el.dataset.busy = '1'; el.dataset.keep = el.innerHTML;
+  el.innerHTML = '<span class="spin"></span>' + esc(text);
+  el.classList.add('busy');
+  if (el.tagName === 'BUTTON') el.disabled = true;
+  return el;
+}
+function busyOff(el){
+  if (!el) return;
+  el.innerHTML = el.dataset.keep || '';
+  el.classList.remove('busy');
+  if (el.tagName === 'BUTTON') el.disabled = false;
+  delete el.dataset.busy;
+}
+function withLoad(id, text, fn){
+  if (loadTimer) return;                       // 防重复点击
+  const el = busyOn(id, text);
+  loadTimer = setTimeout(()=>{ loadTimer = null; busyOff(el); fn(); }, LOAD_MS);
+}
+/* 合盘入口：转圈文案风格对齐「大约需要半分钟」那类提示 */
+function startRun(){
+  if (!S.me || !S.ot) return;
+  withLoad('xp-runBtn', '正在比对两人的行星位置…大约 5 秒', run);
+}
+/* 完美配偶形象入口 */
+function startSpouse(){
+  if (!S.me){ toast('先填写我的出生信息'); openForm('me'); return; }
+  withLoad('xp-spouseGo', '正在定位七宫头与婚神星…大约 5 秒', runSpouse);
+}
+
+initCity(); renderHome();
+/* 调试口：URL 带 #run 时自动填示例并直接出结果页 */
+
+
+
+
+
+/* ---------- 次数：每次生成结果扣 5 次；不足时正文以 xxx 占位，不拦截不跳转 ---------- */
+const XP_COST = 5;
+let XP_SUFFICIENT = true;
+async function spend(cost){
+  try{
+    const h = { 'content-type': 'application/json' };
+    if (typeof deviceId === 'function') h['x-device-id'] = deviceId();
+    const r = await fetch('/api/xp-consume', { method:'POST', headers:h, body: JSON.stringify({ cost }) });
+    const j = await r.json().catch(()=>null);
+    if (j && j.quota && typeof setQuota === 'function') setQuota(j.quota);
+    renderXpQuota();
+    if (j && typeof j.sufficient === 'boolean') return j.sufficient;
+    return true;
+  }catch(e){ return true; }   /* 接口不可用（例如纯静态打开）时不拦 */
+}
+function renderXpQuota(){
+  /* 次数角标已与月老统一（2026-09-26）：直接调 app.js 的 renderQuotaBadge ——
+     它同时刷新月老页头(#quotaBadge)和星盘页头(#xp-quotaBadge)，写入同一份 HTML，
+     文案「我的次数：x次」、形状大小、点击 openPay 跳充值兑换页，两处完全一致。 */
+  if (typeof renderQuotaBadge === 'function') renderQuotaBadge();
+}
+/* 次数不足时的降级渲染（2026-09-26 按 Leo 要求调整）：
+   保留双方总分（.big .n）与两人名字，其余详细内容一律以 xx 打码，
+   并在总分下方显示「请增加次数后解锁详细信息。」 */
+function maskResult(root){
+  if (!root) return;
+  root.querySelectorAll('.wheelbox').forEach(el => {
+    el.innerHTML = '<div style="text-align:center;padding:34px 0;color:var(--ink3);font-size:13.5px">xx</div>';
+  });
+  root.querySelectorAll('.bar i').forEach(el => { el.style.width = '0'; });
+  /* 总分数字保留可见（xp-keep = walk 时不遮） */
+  const nEl = root.querySelector('.big .n');
+  if (nEl) nEl.classList.add('xp-keep');
+  const vEl = root.querySelector('.big .v');
+  if (vEl){
+    const nm = [S.me && S.me.name, S.ot && S.ot.name].filter(Boolean).join(' × ');
+    vEl.textContent = 'xx' + (nm ? ' · ' + nm : '');
+    vEl.classList.add('xp-keep');
+  }
+  /* 小标题里可能直接写出星座（= 答案本身），只把星座名换成 xx，保留标题字样 */
+  root.querySelectorAll('.tt').forEach(el => {
+    el.textContent = el.textContent.replace(/(白羊|金牛|双子|巨蟹|狮子|处女|天秤|天蝎|射手|摩羯|水瓶|双鱼)/g, 'xx');
+  });
+  /* 保留：栏目标题(.sec)、小标题(.tt)、字段标签(.pk/.nm/.kv>span)、
+     维度名(.bk b)、图标符号(.ic/.sym)、按钮、页脚署名、xp-keep 标记的总分 */
+  const BLOCK = ['DIV','P','SECTION','UL','OL','LI','H1','H2','H3','H4','TABLE','TBODY','TR','BUTTON'];
+  const keep = el => el.matches('.sec,.tt,.pk,.nm,.foot,.rights,.ic,.sym,.xp-keep,.bk b')
+    || el.tagName === 'BUTTON'
+    || (el.tagName === 'SPAN' && el.parentElement && el.parentElement.classList.contains('kv'));
+  (function walk(el){
+    if (keep(el)) return;
+    const kids = Array.from(el.children);
+    if (!kids.length){ if (el.textContent.trim()) el.textContent = 'xx'; return; }
+    /* 纯行内结构（b/em/br/文本混排）：整块换成一个 xx，避免「xx xx」连排 */
+    if (!kids.some(k => BLOCK.indexOf(k.tagName) >= 0) && !kids.some(keep)){
+      if (el.textContent.trim()) el.textContent = 'xx';
+      return;
+    }
+    /* 块级结构：直接文本节点也遮（最多留一个 xx），再往下递归 */
+    let first = true;
+    Array.from(el.childNodes).forEach(n => {
+      if (n.nodeType === 3 && n.nodeValue.trim()){
+        if (first){ n.nodeValue = 'xx'; first = false; } else n.nodeValue = '';
+      }
+    });
+    kids.forEach(walk);
+  })(root);
+  /* 总分下方（或页面顶部）插入解锁提示 —— walk 之后插入，天然不会被遮 */
+  const LOCK_TIP = '<div style="text-align:center;margin-top:12px;padding:9px 12px;font-size:13px;font-weight:600;'
+    + 'color:var(--accent);background:#fff7ed;border:1px solid #fde3c8;border-radius:9px">请增加次数后解锁详细信息。</div>';
+  const big = root.querySelector('.big');
+  if (big) big.insertAdjacentHTML('beforeend', LOCK_TIP);
+  else root.insertAdjacentHTML('afterbegin', LOCK_TIP);
+}
+const _run = run, _runSpouse = runSpouse;
+run = async function(){
+  XP_SUFFICIENT = await spend(XP_COST);
+  _run();
+  if (!XP_SUFFICIENT) maskResult($('xp-scr-result'));
+};
+runSpouse = async function(){
+  XP_SUFFICIENT = await spend(XP_COST);
+  _runSpouse();
+  if (!XP_SUFFICIENT) maskResult($('xp-scr-spouse'));
+};
+/* ---------- 扣次确认：星盘不便宜（一次 5 次），点生成先把价亮出来 ----------
+   必须挂在按钮入口（startRun/startSpouse）而不是 run() ——
+   入口会先 withLoad 转 5 秒圈才调 run，挂错位置用户转完圈才看到弹窗。
+   次数不足也如实说明：点确认仍可进入结果页（总分可见、详细内容以 xx 打码），
+   服务端对不足请求不扣次数。 */
+function confirmSpend(){
+  const r = (typeof remaining === 'function') ? remaining() : null;
+  const hasR = (r !== null && r !== undefined);
+  if (hasR && r < XP_COST){
+    return window.confirm('星盘合盘每次需要消耗5次（你剩余次数不够），是否确认');
+  }
+  return window.confirm('星盘合盘每次需要消耗 5 次' + (hasR ? ('（你剩 ' + r + ' 次）') : '') + '，是否确认？');
+}
+const _startRun = startRun, _startSpouse = startSpouse;
+startRun = function(){
+  if (!S.me || !S.ot) return _startRun();   /* 条件不满足 → 原逻辑自己处理 */
+  if (!confirmSpend()) return;               /* 用户取消：什么都不发生 */
+  return _startRun();
+};
+startSpouse = function(){
+  if (!S.me) return _startSpouse();          /* 原逻辑 toast + 打开表单 */
+  if (!confirmSpend()) return;
+  return _startSpouse();
+};
+window.XP = { show, openForm, saveForm, fillSample, run, startRun, startSpouse,
+              renderXpQuota, onShow: function(){ renderXpQuota();
+                if (typeof updateSubbar === 'function') updateSubbar(xpScreen, XP_TITLES[xpScreen] || ''); } };
+renderXpQuota();
+
+if (location.hash === '#run'){ fillSample(); run(); }
+if (location.hash === '#spouse'){ fillSample(); runSpouse(); }
+if (location.hash === '#loadrun'){ fillSample(); startRun(); }
+if (location.hash === '#loadspouse'){ fillSample(); startSpouse(); }
+
+})();
+</script>
+<script>
+
+/* ---------- 底部导航：两个月老/星盘互切，各自输入与状态都留在 DOM 里 ---------- */
+function switchTab(t){
+  /* 已经停在星盘页时再点「星盘」= 回星盘首页（与主流 App 点当前 tab 回首页一致）。
+     没有这条的话，用户在结果页/填写页点「星盘」会毫无反应。 */
+  if (t === 'xing' && !$('page-xing').classList.contains('hide') && window.XP && window.XP.show){
+    try { window.XP.show('home'); } catch (e) {}
+  }
+  $('page-yue').classList.toggle('hide', t !== 'yue');
+  $('page-xing').classList.toggle('hide', t !== 'xing');
+  document.querySelectorAll('#tabbar .tab').forEach(el => el.classList.toggle('on', el.getAttribute('data-tab') === t));
+  try { localStorage.setItem('combo_tab', t); } catch (e) {}
+  if (t === 'xing' && window.XP && window.XP.onShow) window.XP.onShow();
+  /* 切回月老：按月老当前所在屏决定顶部条显示与否（停在首页就不显示） */
+  else if (t === 'yue' && typeof updateSubbar === 'function' && typeof curScreen !== 'undefined'){
+    updateSubbar(curScreen, (typeof SUB_TITLES !== 'undefined' ? SUB_TITLES[curScreen] : ''));
+  }
+  window.scrollTo(0, 0);
+}
+try { if (localStorage.getItem('combo_tab') === 'xing') switchTab('xing'); } catch (e) {}
+/* 调试口：URL 带 #xing / #loadrun / #loadspouse 时直接落在星盘页 */
+try { if (/^#(xing|loadrun|loadspouse|run|spouse)/.test(location.hash)) switchTab('xing'); } catch (e) {}
+
+</script>
+</body>
+</html>

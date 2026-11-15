@@ -1,0 +1,38 @@
+# 密钥与本地配置（绝不能入库）
+.env
+*.env
+**/.env
+
+# 运行数据与客户数据
+data/
+match/data/
+match-beta/data/
+*.log
+
+# 临时产物与本地分析
+tmp/
+recon/
+logs/
+outputs/
+
+# WorkBuddy 本地项目元数据
+.workbuddy/
+.wbapp_*.genie
+.skill/
+
+# 收款码（个人收款信息，绝不入库）
+**/pay/*.png
+
+# 依赖
+node_modules/
+
+# 系统
+.DS_Store
+Thumbs.db
+
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 历史数据备份（含订单/码库）
+data-backup-*/

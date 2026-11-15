@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<!-- build: 2026-09-26T14:58+08:00 (规则库 v4 · 报告合一 · CDK 兑换 · 免输入自动解锁 · IP+设备限流 · 署名Ice icy · 一键填写 · 提示精简 · 多档案隔离 · 颜值/学历档位口径统一 · 星盘合并进主入口 · 扣次前确认 · 免费次数5→3 · 次数角标统一「我的次数：x次」 · 星盘不足降级保留总分 · 星盘页角标点击先切回月老再进购买页) -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>月老合盘 · 相亲合拍分析</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="icon" href="icon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="theme-color" content="#f97316">
+<meta name="apple-mobile-web-app-title" content="月老合盘">
+<style>
+:root{--ink:#17191c;--ink2:#4c545d;--ink3:#8a929b;--line:#e5e9ee;--bg:#f4f6f8;--card:#fff;
+--accent:#f97316;--good:#16a34a;--warn:#ca8a04;--risk:#dc2626;--ok:#2563eb;}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.78;
+font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 90px}
+header{padding:20px 0 8px}
+.hd{display:flex;align-items:center;gap:11px}
+.logo{width:36px;height:36px;flex:0 0 36px;border-radius:10px;display:block}
+header h1{font-size:21px;margin:0 0 3px;font-weight:700;letter-spacing:.5px}
+header p{margin:0;font-size:12.5px;color:var(--ink3)}
+.hide{display:none!important}
+.sec{font-size:12.5px;font-weight:600;color:var(--ink3);margin:20px 0 8px;letter-spacing:.4px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:12px}
+.pcard{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.pcard .nm{font-weight:600;font-size:15px}
+.pcard .sm{font-size:12.5px;color:var(--ink3);margin-top:2px;line-height:1.5}
+.pcard .go{color:var(--accent);font-size:13px;font-weight:600;white-space:nowrap;cursor:pointer}
+.pcard .go.mute{color:var(--ink3);font-weight:400}
+.acts{display:flex;gap:14px;align-items:center}
+button{font-family:inherit}
+.btn{display:block;width:100%;padding:14px;border:none;border-radius:12px;background:var(--accent);color:#fff;
+font-size:16px;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.45}
+.btn.ghost{background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.btn.sm{padding:10px;font-size:14px}
+.q{margin-bottom:20px}
+.q .lb{font-size:14.5px;font-weight:600;margin-bottom:3px}
+.q .hint{font-size:12px;color:var(--ink3);margin-bottom:8px;line-height:1.5}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{padding:9px 14px;border:1px solid var(--line);border-radius:9px;background:#fff;
+font-size:13.5px;color:var(--ink2);cursor:pointer}
+.opt.on{border-color:var(--accent);background:#fff7ed;color:#c2410c;font-weight:600}
+.opt.wide{flex:1 1 46%}
+input[type=number], input[type=text], textarea{width:100%;padding:11px 13px;border:1px solid var(--line);
+border-radius:9px;font-size:15px;font-family:inherit;color:var(--ink);background:#fff;line-height:1.6}
+input[type=number]{font-family:ui-monospace,Consolas,monospace}
+input:focus, textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(249,115,22,.1)}
+textarea{resize:vertical;min-height:96px}
+input::placeholder, textarea::placeholder{color:#b6bcc4;font-size:13.5px}
+.rgr{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rgr label{font-size:12px;color:var(--ink3);display:block;margin-bottom:3px}
+.big{text-align:center;padding:20px 0 8px}
+.big .n{font-size:54px;font-weight:800;line-height:1;color:var(--accent)}
+.big .n small{font-size:16px;color:var(--ink3);font-weight:600}
+.big .v{font-size:17px;font-weight:700;margin-top:10px}
+.big .s{font-size:13.5px;color:var(--ink2);margin-top:7px;line-height:1.7;text-align:left}
+.bar{height:9px;background:#eef1f5;border-radius:5px;overflow:hidden;margin-top:14px}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:5px}
+.row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid #f2f5f8;font-size:13.5px}
+.row:last-child{border-bottom:none}
+.row .k{color:var(--ink3);flex:0 0 auto}
+.row .v{font-weight:600;text-align:right}
+.blk{margin-bottom:14px}
+.blk:last-child{margin-bottom:0}
+.blk .tt{font-size:14px;font-weight:600;margin-bottom:5px}
+.blk .dd{font-size:13.5px;color:var(--ink2);line-height:1.75}
+.arw{color:var(--accent);font-weight:700}
+.tagline{display:inline-block;font-size:12px;padding:2px 10px;border-radius:20px;background:#eef1f5;color:var(--ink2);margin:0 6px 6px 0}
+.tip{display:flex;gap:9px;font-size:13.5px;color:var(--ink2);margin-bottom:9px;line-height:1.7}
+.tip .ic{flex:0 0 20px;height:20px;border-radius:6px;background:var(--ink3);color:#fff;
+font-size:11px;display:flex;align-items:center;justify-content:center;font-weight:700;margin-top:3px}
+.ic-hard{background:var(--risk)}.ic-soft{background:var(--warn)}.ic-gap{background:var(--good)}
+.ic-route{background:var(--good)}.ic-note{background:var(--accent)}.ic-ok{background:var(--ink3)}
+.ai{background:#fffaf5;border:1px solid #fde3c8}
+.ai h3{margin:0 0 12px;font-size:15px;color:#c2410c}
+.li{position:relative;padding-left:16px;margin-bottom:8px;font-size:13.5px;color:var(--ink2);line-height:1.7}
+.li:before{content:'';position:absolute;left:4px;top:10px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+details{margin-top:6px}
+summary{font-size:12.5px;color:var(--ink3);cursor:pointer;padding:6px 0;outline:none}
+.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px;color:var(--ink3)}
+.foot{text-align:center;font-size:11.5px;color:var(--ink3);margin-top:22px;line-height:1.7}
+.rights{margin-top:10px;font-size:11px;letter-spacing:.4px;color:var(--ink3);opacity:.75}
+.locknote{padding:14px 0;text-align:center;font-size:13.5px;color:var(--ink3);
+  border:1px dashed #dfe4ea;border-radius:10px;background:#fafbfc;letter-spacing:.5px}
+.locknote::before{content:"🔒";display:block;font-size:17px;margin-bottom:6px;opacity:.6}
+
+/* ---------- 一键填写：一整段粘贴自动分栏 ---------- */
+.af{margin-bottom:24px;padding:15px;border:1px solid #dfe4ea;border-radius:12px;
+  background:linear-gradient(180deg,#fcfdff,#f6f8fb)}
+.af .lb{font-size:14.5px;font-weight:600;margin-bottom:10px}
+.af textarea{min-height:84px}
+.afchk{display:flex;align-items:center;gap:7px;margin:9px 0;font-size:12.5px;
+  color:var(--ink2);cursor:pointer;-webkit-user-select:none;user-select:none}
+.afchk input{flex:0 0 auto;width:15px;height:15px;margin:0;accent-color:var(--accent);cursor:pointer}
+.afmsg{display:none;margin-top:10px;padding:10px 12px;border-radius:9px;background:#fff;
+  border:1px solid var(--line);font-size:12.5px;line-height:1.7;color:var(--ink2)}
+.afmsg.on{display:block}
+.afmsg.warn{background:#fffbeb;border-color:#fde68a;color:#92400e}
+.afmsg.bad{background:#fef2f2;border-color:#fecaca;color:#b91c1c}
+.toast{position:fixed;left:50%;bottom:36px;transform:translateX(-50%);background:rgba(23,25,28,.93);
+color:#fff;padding:10px 18px;border-radius:22px;font-size:13.5px;opacity:0;transition:opacity .25s;pointer-events:none;z-index:99;max-width:80vw;text-align:center}
+.toast.on{opacity:1}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);
+border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px;margin-right:7px}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* ---------- 右上角剩余次数 ---------- */
+header{position:relative}
+.qt{position:absolute;right:0;top:22px}
+.qb{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;
+padding:6px 12px;border-radius:20px;background:#fff7ed;color:#c2410c;border:1px solid #fde3c8;
+cursor:pointer;white-space:nowrap}
+.qb-n{font-size:14px;font-weight:800}
+.qb-out{background:#f4f6f8;color:var(--ink2);border-color:var(--line)}
+.qb-beta{background:#eef4ff;color:#1d4ed8;border-color:#c7d9fe;cursor:default}
+
+/* ---------- 完整报告 ---------- */
+.report .rp{margin:0 0 15px;font-size:14.5px;line-height:1.95;color:var(--ink)}
+.report .rp:last-child{margin-bottom:0}
+.report .rp-lead{font-size:15px;color:#c2410c;font-weight:500}
+.rpgate{height:0}
+
+/* ---------- 付费墙 ---------- */
+.pw{margin-top:16px;padding-top:16px;border-top:1px dashed #fde3c8}
+.pw-t{font-size:14.5px;font-weight:700;color:#c2410c;margin-bottom:8px}
+.pw-l{margin:0 0 14px;padding-left:18px;font-size:13.5px;color:var(--ink2);line-height:1.9}
+.pw-l li{margin-bottom:2px}
+.pw-n{font-size:12px;color:var(--ink3);text-align:center;margin-top:10px;line-height:1.7}
+
+/* ---------- 精简版要点卡 ---------- */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.pi{background:#f8fafc;border-radius:10px;padding:10px 12px}
+.pk{font-size:11.5px;color:var(--ink3);margin-bottom:3px}
+.pv{font-size:14px;font-weight:700}
+.oneline{font-size:13.5px;color:var(--ink2);line-height:1.75}
+.kv{display:flex;justify-content:space-between;align-items:center;gap:10px;
+padding:7px 0;border-bottom:1px solid #f6f8fa;font-size:13.5px}
+.kv:last-child{border-bottom:none}
+.kv>span{color:var(--ink3)}
+.kv>b{font-weight:600}
+.gapkv{display:grid;grid-template-columns:1fr auto auto;gap:10px}
+.gapkv>em{font-style:normal;font-size:12px;color:var(--ink3);min-width:44px;text-align:right}
+
+/* ---------- 充值 / 兑换页 ---------- */
+/* CDK 兑换（2026-09-21 起的收费方式：成交在第三方平台，本站只负责兑换） */
+.cdk-t{font-size:15px;font-weight:600;margin-bottom:4px}
+.cdk-d{font-size:12.5px;color:var(--ink3);line-height:1.65;margin-bottom:11px}
+.cdk-in{font-family:ui-monospace,Consolas,monospace;font-size:17px;letter-spacing:1.5px;
+  text-align:center;text-transform:uppercase}
+.cdkmsg{margin-top:11px;padding:11px 13px;border-radius:10px;font-size:13px;line-height:1.7}
+.cdkmsg.ok{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
+.cdkmsg.err{background:#fef2f2;border:1px solid #fecaca;color:#b91c1c}
+.wxbox{margin-top:11px;padding:12px 14px;border-radius:10px;background:#f8fafc;border:1px solid var(--line)}
+.wx-l{font-size:11.5px;color:var(--ink3);margin-bottom:3px}
+.wx-v{font-family:ui-monospace,Consolas,monospace;font-size:14px;font-weight:600;
+  color:var(--ink);word-break:break-all;-webkit-user-select:all;user-select:all}
+.qr-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.qr-n{font-size:38px;font-weight:800;line-height:1;color:var(--accent)}
+.qr-l{font-size:12.5px;color:var(--ink3);margin-top:5px}
+.qr-r{font-size:12.5px;color:var(--ink2);text-align:right;max-width:52%;line-height:1.6}
+.plist{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.plan{position:relative;border:1.5px solid var(--line);border-radius:12px;padding:14px 8px 12px;
+text-align:center;cursor:pointer;background:#fff}
+.plan.on{border-color:var(--accent);background:#fff7ed}
+.pflag{position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+background:var(--accent);color:#fff;font-size:10px;font-weight:700;
+padding:2px 8px;border-radius:9px;white-space:nowrap}
+.pn{font-size:13px;font-weight:600;margin-bottom:6px}
+.pp{font-size:19px;font-weight:800;color:var(--accent);line-height:1.2}
+.pp .pu{font-size:11px;color:var(--ink3);font-weight:400}
+.pd{font-size:11px;color:var(--ink3);margin-top:5px;line-height:1.4}
+.paybox{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.payq{text-align:center}
+.payq img{width:100%;max-width:190px;border-radius:10px;border:1px solid var(--line);display:block;margin:0 auto;background:#fff}
+.payl{font-size:12.5px;color:var(--ink3);margin-top:7px}
+.paymiss{width:100%;max-width:190px;margin:0 auto;height:190px;border:1px dashed var(--line);
+border-radius:10px;display:flex;align-items:center;justify-content:center;
+font-size:12.5px;color:var(--ink3);line-height:1.7;text-align:center;background:#fafbfc}
+/* 二级页顶部条：返回键固定左上角 + 页面名居中（与星盘合盘一致） */
+.subbar{position:fixed;left:0;right:0;top:0;z-index:95;height:52px;background:rgba(255,255,255,.98);
+border-bottom:1px solid var(--line)}
+.subbar .in{position:relative;height:100%;max-width:640px;margin:0 auto;padding:0 16px;
+display:flex;align-items:center;justify-content:center}
+.subbar .subttl{font-size:16.5px;font-weight:700;color:var(--ink);letter-spacing:.3px;text-align:center}
+.subbar .xpback{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;
+display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);
+border-radius:50%;cursor:pointer;color:var(--ink);padding:0;-webkit-tap-highlight-color:transparent}
+.subbar .xpback svg{width:19px;height:19px}
+.subbar .xpback:active{background:#fff7ed;color:var(--accent)}
+.wrap.sub{padding-top:62px}
+</style>
+</head>
+<body>
+  <div class="subbar hide" id="subbar">
+    <div class="in">
+      <button class="xpback" id="subBack" onclick="goHome()" aria-label="返回" title="返回">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4.5 7.5 12l7.5 7.5" fill="none" stroke="currentColor"
+          stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="subttl" id="subTitle"></div>
+    </div>
+  </div>
+
+<div class="wrap">
+
+
+  <header id="yueHead">
+    <div class="hd">
+      <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="0.35" y2="1">
+            <stop offset="0" stop-color="#fdba74"/>
+            <stop offset="1" stop-color="#ea580c"/>
+          </linearGradient>
+        </defs>
+        <rect width="64" height="64" rx="15" fill="url(#lg)"/>
+        <path fill="#fff" d="M32 49.8C20.4 42.3 11.6 34.6 11.6 26.1c0-6.5 5-11.4 11.3-11.4 3.9 0 7.2 2.3 9.1 5.9 1.9-3.6 5.2-5.9 9.1-5.9 6.3 0 11.3 4.9 11.3 11.4 0 8.5-8.8 16.2-20.4 23.7z"/>
+      </svg>
+      <div>
+        <h1>月老合盘</h1>
+        <p>2026 50万字大数据分析，最精准的合盘数据</p>
+      </div>
+    </div>
+    <div class="qt"><span id="quotaBadge"></span></div>
+  </header>
+
+  <section id="scr-home">
+    <div class="sec">我的档案</div>
+    <div id="meBox"></div>
+
+    <div class="sec">对方档案</div>
+    <div id="othersBox"></div>
+    <button class="btn ghost sm" style="margin-top:4px" onclick="addOther()">＋ 新增对方档案</button>
+
+    <div class="sec">开始分析</div>
+    <div id="runBox"></div>
+
+    <div class="sec">试试看</div>
+    <button class="btn ghost sm" onclick="fillSample('balanced')">示例：条件相当的一对</button>
+    <button class="btn ghost sm" style="margin-top:8px" onclick="fillSample('mismatch')">示例：差距较大的一对</button>
+
+    <div class="foot">你的档案只保存在这台设备上，不会被上传。<br>判断依据来自大量真人相亲案例的整理，结果仅供参考，不构成对任何人的评价。
+      <div class="rights">all rights reserved by 小红书 Ice icy</div></div>
+  </section>
+
+  <section id="scr-form" class="hide">
+    <div class="sec" id="formTitle"></div>
+    <div id="formBody"></div>
+    <button class="btn" onclick="saveForm()">保存档案</button>
+  </section>
+
+  <section id="scr-result" class="hide"></section>
+
+  <section id="scr-pay" class="hide"></section>
+
+</div>
+<div class="toast" id="toast"></div>
+
+<!-- ?v= 版本号：CDN（EdgeOne）按路径缓存，不带参数的 URL 会喂旧版；
+     改 engine/questions 的权重或题库时**必须同步 bump 这个数字**。 -->
+<script src="questions.js?v=19"></script>
+<script src="app.js?v=19"></script>
+</body>
+</html>
